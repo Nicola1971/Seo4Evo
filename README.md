@@ -1,5 +1,6 @@
 Seo4Evo
 =======
+### Seo4Evo RC 1
 
 Collections of SEO Tools for MODx Evolution with a dedicated Manager Tab
 
