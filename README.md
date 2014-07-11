@@ -5,13 +5,13 @@ Collections of SEO Tools for MODx Evolution
 
 This Package includes:
 
-# Plugins:
+## Plugins:
 * Virtual Alias
 
-# Snippets:
+## Snippets:
 * Sitemap Snippet
 
-#Tvs
+## Tvs
 
 * Aliases
 * CustomTitle (custom title for metatag title)
@@ -21,15 +21,18 @@ This Package includes:
 * sitemap_exclude (for Sitemap Snippet)
 * sitemap_priority (for Sitemap Snippet)
 
-##Install
+## Install
 
 With Package Manager
 
-##Usage
+# Usage
 
-#MetaTags
+## MetaTags
 
-<title>[*CustomTitle*]</title>
-<meta name="robots" content="[*RobotsIndex*], [*RobotsFollow*]" />
+### Title
+
+`<title>[*CustomTitle*]</title> ` 
+### Robots
+` <meta name="robots" content="[*RobotsIndex*], [*RobotsFollow*]" />`
 
 
