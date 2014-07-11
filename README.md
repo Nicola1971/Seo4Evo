@@ -8,23 +8,23 @@ Collections of SEO Tools for MODx Evolution with a dedicated Manager Tab
 This Package includes   
 
 ## Plugins:
-* Virtual Alias
+* Virtual Alias: http://www.stanback.net/code/modx/virtual-aliases.html
 
 ## Snippets:
-* Sitemap Snippet
+* Sitemap Snippet: http://modx.com/extras/package/sitemap
 
 ## Chunks:
-* mm demo rules SEO (example for manager Manager)
+* mm demo rules SEO (sample code for ManagerManager plugin the Seo Tab)
 
 ## Tvs
 
-* Aliases
-* CustomTitle (custom title for metatag title)
-* RobotsFollow (for metatag robots)
-* RobotsIndex (for metatag robots)
-* sitemap_changefreq (for Sitemap Snippet)
-* sitemap_exclude (for Sitemap Snippet)
-* sitemap_priority (for Sitemap Snippet)
+* Aliases (301 redirect urls for Virtual Alias)
+* CustomTitle (custom title tv for metatag title)
+* RobotsFollow (setting for metatag robots)
+* RobotsIndex (setting for metatag robots)
+* sitemap_changefreq (setting for Sitemap Snippet)
+* sitemap_exclude (setting for Sitemap Snippet)
+* sitemap_priority (setting for Sitemap Snippet)
 
 ## Install
 
