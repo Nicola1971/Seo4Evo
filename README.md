@@ -13,7 +13,7 @@ This Package includes
 
 ## Snippets:
 * Sitemap Snippet: http://modx.com/extras/package/sitemap
-* DynamicDescription 1.0.0
+* DynamicDescription 1.0.0 http://modx.com/extras/package/dynamicdescription
 
 ## Chunks:
 * mm demo rules SEO (sample code for ManagerManager plugin the Seo Tab)
@@ -42,9 +42,16 @@ and add
 ###### see: http://wiki.modxcms.com/index.php/SiteMap:_Google_sitemaps_in_MODx
 ## MetaTags
 
-### Title
-
+### Meta Title
 `<title>[*CustomTitle*]</title> ` 
+
+### Meta Description
+
+<meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">
+
+### Meta Keywords
+<meta name="keywords" content="[*MetaKeywords*]">
+
 ### Robots
 ` <meta name="robots" content="[*RobotsIndex*], [*RobotsFollow*]" />`
 
