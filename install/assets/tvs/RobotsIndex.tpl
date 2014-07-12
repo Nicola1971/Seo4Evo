@@ -9,7 +9,7 @@
  * @internal    @input_type dropdown
  * @internal    @input_options Yes==index||No==noindex
  * @internal    @input_default index
- * @internal	@output_widget 
- * @internal	@output_widget_params 
- * @internal    @template_assignments frameBoot-Inserzione,frameBoot-Home,frameBoot,frameBoot-Container,frameBoot-Page,frameBoot-Azienda,frameBoot-Page-NoAds
+ * @internal	@output_widget
+ * @internal	@output_widget_params
+ * @internal    @template_assignments
  */

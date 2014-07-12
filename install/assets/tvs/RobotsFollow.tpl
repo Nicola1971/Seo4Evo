@@ -11,5 +11,5 @@
  * @internal    @input_default follow
  * @internal	@output_widget
  * @internal	@output_widget_params
- * @internal    @template_assignments frameBoot-Inserzione,frameBoot-Home,frameBoot,frameBoot-Container,frameBoot-Page,frameBoot-Azienda,frameBoot-Page-NoAds
+ * @internal    @template_assignments
  */
