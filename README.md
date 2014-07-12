@@ -47,7 +47,7 @@ and add
 
 ### Meta Description
 
-` <meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">` 
+``  <meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">``  
 
 ### Meta Keywords
 ` <meta name="keywords" content="[*MetaKeywords*]">` 
