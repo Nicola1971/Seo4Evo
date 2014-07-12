@@ -1,10 +1,10 @@
 Seo4Evo
 =======
-### Seo4Evo RC 1
+### Seo4Evo RC 1.1
 
 Collections of SEO Tools for MODx Evolution with a dedicated Manager Tab
 
-![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo.jpg)
+![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC1.1.jpg)
 
 This Package includes   
 
@@ -13,6 +13,7 @@ This Package includes
 
 ## Snippets:
 * Sitemap Snippet: http://modx.com/extras/package/sitemap
+* DynamicDescription 1.0.0
 
 ## Chunks:
 * mm demo rules SEO (sample code for ManagerManager plugin the Seo Tab)
@@ -20,7 +21,9 @@ This Package includes
 ## Tvs
 
 * Aliases (301 redirect urls for Virtual Alias)
-* CustomTitle (custom title tv for metatag title)
+* MetaDescription (metatag description)
+* MetaKeywords (metatag keywords)
+* CustomTitle (cmetatag title)
 * RobotsFollow (setting for metatag robots)
 * RobotsIndex (setting for metatag robots)
 * sitemap_changefreq (setting for Sitemap Snippet)
