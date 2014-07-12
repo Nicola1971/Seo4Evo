@@ -47,10 +47,10 @@ and add
 
 ### Meta Description
 
-<meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">
+` <meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">` 
 
 ### Meta Keywords
-<meta name="keywords" content="[*MetaKeywords*]">
+` <meta name="keywords" content="[*MetaKeywords*]">` 
 
 ### Robots
 ` <meta name="robots" content="[*RobotsIndex*], [*RobotsFollow*]" />`
