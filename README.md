@@ -2,7 +2,7 @@ Seo4Evo
 =======
 ### Seo4Evo RC 1.1
 
-Collections of SEO Tools for MODx Evolution with a dedicated Manager Tab
+Collections of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
 ![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC1.1.jpg)
 
@@ -12,6 +12,7 @@ This Package includes
 * Virtual Alias: http://www.stanback.net/code/modx/virtual-aliases.html
 
 ## Snippets:
+* Seo4Evo: Returns HTML meta tags for SEO4EVO Package (based on MetaTagsExtra by Soda http://modx.com/extras/package/metatagsextra) 
 * Sitemap Snippet: http://modx.com/extras/package/sitemap
 * DynamicDescription 1.0.0 http://modx.com/extras/package/dynamicdescription
 
@@ -21,6 +22,8 @@ This Package includes
 ## Tvs
 
 * Aliases (301 redirect urls for Virtual Alias)
+* CanonicalUrl 
+* GoogleAuthor
 * MetaDescription (metatag description)
 * MetaKeywords (metatag keywords)
 * CustomTitle (cmetatag title)
@@ -32,30 +35,24 @@ This Package includes
 
 ## Install
 
-With Package Manager
+* With Package Manager
 
-# Usage
-## Sitemap
-Create a modx document named sitemap with doc type xml 
-and add
-``````[!SiteMap? &amp;format=`sp`  &excludeTemplates=`blank` &excludeTV=`sitemap_exclude` &priority=`sitemap_priority` &changefreq=`sitemap_changefreq` &excludeWeblinks=`true`!]``````
+* set all Seo4Evo template variables  for access to you template
+* copy the code from mm demo rules SEO in your default mm rules chunk
+
+### Create a sitemap page
+# create a new resource :
+
+* title: sitemap
+* URL alias: sitemap.xml
+* Show in menu : no 
+* Published: yes
+* Internet Media Type: text/xml
+* Rich text: no
+* Resource content: ``````[!SiteMap? &amp;format=`sp`  &excludeTemplates=`blank` &excludeTV=`sitemap_exclude` &priority=`sitemap_priority` &changefreq=`sitemap_changefreq` &excludeWeblinks=`true`!]``````
 ###### see: http://wiki.modxcms.com/index.php/SiteMap:_Google_sitemaps_in_MODx
-## MetaTags
-
-### Meta Title
-`<title>[*CustomTitle*]</title> ` 
-
-### Meta Description
-
-``  <meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &maxWordCount=`70`]]">``  
-
-### Meta Keywords
-` <meta name="keywords" content="[*MetaKeywords*]">` 
-
-### Robots
-` <meta name="robots" content="[*RobotsIndex*], [*RobotsFollow*]" />`
 
 
-#SEO TAB
+## Snippet Call
+Add [[Seo4Evo]] after the opening <head> tag in your template
 
-Copy the code from the sample mm rules chunk in your default Manager manager chunk
