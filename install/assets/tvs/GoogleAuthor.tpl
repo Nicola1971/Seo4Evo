@@ -1,15 +1,15 @@
 /**
- * MetaKeywords
+ * GoogleAuthor
  *
- * Meta Keywords - comma separated keywords
+ * Google plus author page URL
  *
  * @category	tv
  * @internal	@modx_category Seo4Evo
- * @internal    @caption Meta Keywords
+ * @internal    @caption Author
  * @internal    @input_type text
  * @internal    @input_options
  * @internal    @input_default
- * @internal	@output_widget delim
- * @internal	@output_widget_params &format=,
+ * @internal	@output_widget
+ * @internal	@output_widget_params
  * @internal    @template_assignments
  */

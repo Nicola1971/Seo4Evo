@@ -4,7 +4,7 @@
  * SiteMap version 1.0.11
  *
  * @category	snippet
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 //<?php

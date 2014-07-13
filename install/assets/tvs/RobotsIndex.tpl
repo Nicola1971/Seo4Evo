@@ -4,7 +4,7 @@
  * Include or exclude this page in Search Engines
  *
  * @category	tv
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @internal    @caption Robots - Index this Page
  * @internal    @input_type dropdown
  * @internal    @input_options Yes==index||No==noindex

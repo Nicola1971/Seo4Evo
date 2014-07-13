@@ -1,14 +1,14 @@
 /**
  * MetaDescription
  *
- * Meta Description - default value [*description*]
+ * If Empty get the first 25 words from content
  *
  * @category	tv
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @internal    @caption Meta Description
- * @internal    @input_type text
+ * @internal    @input_type textareamini
  * @internal    @input_options
- * @internal    @input_default [*description*]
+ * @internal    @input_default
  * @internal	@output_widget
  * @internal	@output_widget_params
  * @internal    @template_assignments

@@ -9,7 +9,7 @@
  * @author Brian Stanback (http://www.stanback.net/code/modx/virtual-aliases.html)
  * @internal @properties &aliasesTV=Aliases TV name;string;Aliases
  * @internal @events OnPageNotFound
- * @internal @modx_category SEO
+ * @internal @modx_category Seo4Evo
  * @internal @installset base, sample
  */
 

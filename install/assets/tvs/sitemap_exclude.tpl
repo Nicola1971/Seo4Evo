@@ -4,7 +4,7 @@
  * Include or exclude this page in Google SiteMap
  *
  * @category	tv
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @internal    @caption Sitemap exclude
  * @internal    @input_type dropdown
  * @internal    @input_options Include==0||Exclude==1

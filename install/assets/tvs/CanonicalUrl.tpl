@@ -1,15 +1,15 @@
 /**
- * MetaKeywords
+ * CanonicalUrl
  *
- * Meta Keywords - comma separated keywords
+ * Custom CanonicalUrl
  *
  * @category	tv
  * @internal	@modx_category Seo4Evo
- * @internal    @caption Meta Keywords
+ * @internal    @caption CanonicalUrl
  * @internal    @input_type text
  * @internal    @input_options
  * @internal    @input_default
- * @internal	@output_widget delim
- * @internal	@output_widget_params &format=,
+ * @internal	@output_widget
+ * @internal	@output_widget_params
  * @internal    @template_assignments
  */

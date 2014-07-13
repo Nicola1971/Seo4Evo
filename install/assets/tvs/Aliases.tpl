@@ -4,7 +4,7 @@
  * Add old url
  *
  * @category	tv
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @internal    @caption 301 Redirects
  * @internal    @input_type textareamini
  * @internal    @input_options

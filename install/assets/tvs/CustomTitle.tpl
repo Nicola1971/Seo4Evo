@@ -1,14 +1,14 @@
 /**
  * CustomTitle
  *
- * Seo Custom Title for metatag title - default value [*pagetitle*]
+ * Seo Custom Title for metatag title - Default value is [*pagetitle*]
  *
  * @category	tv
- * @internal	@modx_category SEO
+ * @internal	@modx_category Seo4Evo
  * @internal    @caption CustomTitle
  * @internal    @input_type text
  * @internal    @input_options
- * @internal    @input_default [*pagetitle*]
+ * @internal    @input_default
  * @internal	@output_widget
  * @internal	@output_widget_params
  * @internal    @template_assignments
