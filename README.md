@@ -6,7 +6,7 @@ Collections of SEO Tools for MODx Evolution from various authors with a dedicate
 
 ![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC1.1.jpg)
 
-This Package includes   
+# This Package includes   
 
 ## Plugins:
 * Virtual Alias: http://www.stanback.net/code/modx/virtual-aliases.html
@@ -33,15 +33,15 @@ This Package includes
 * sitemap_exclude (setting for Sitemap Snippet)
 * sitemap_priority (setting for Sitemap Snippet)
 
-## Install
+# Install
 
 * With Package Manager
 
 * set all Seo4Evo template variables  for access to you template
 * copy the code from mm demo rules SEO in your default mm rules chunk
 
-### Create a sitemap page
-# create a new resource :
+# Create a sitemap page
+### Create a new resource :
 
 * title: sitemap
 * URL alias: sitemap.xml
@@ -53,6 +53,6 @@ This Package includes
 ###### see: http://wiki.modxcms.com/index.php/SiteMap:_Google_sitemaps_in_MODx
 
 
-## Snippet Call
+# Snippet Call
 Add [[Seo4Evo]] after the opening <head> tag in your template
 
