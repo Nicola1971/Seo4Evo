@@ -74,23 +74,22 @@ Add [[Seo4Evo]] after the opening <head> tag in your template
 
 # On page settings (tvs)
 
+#### Seo4Evo Snippet tvs:
 * linkAuth your google author page
 * CustomTitle - Seo Custom Title for metatag title - Default value is [*pagetitle*]
-* Meta Description - If Empty get the first 25 words from content 
-Using DynamicDescription snippet:
-http://modx.com/extras/package/dynamicdescription 
 * Meta Keywords - Meta Keywords - comma separated keywords
 * CanonicalUrl - Custom CanonicalUrl - If Empty full alias for pages or domain url for homepage - works like using if snippet :
 <link rel="canonical" href="[[if? &is=`[*id*]:is:1` &then=`[(site_url)]` &else=`[(site_url)][~[*id*]~]`]]" />
 * 301 Redirects - Add old url - Url redirect using Virtual Alias Plugin.
 http://www.stanback.net/code/modx/virtual-aliases.html 
 New aliases should each be added on a separate line. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
-
-
 * Author -  Google plus author page URL (if empty does not diesplay the tag)
 
-#### SiteMap Snippet tvs:
+####  DynamicDescription Snippet tvs:
+* Meta Description - If Empty get the first 25 words from content 
 
+
+#### SiteMap Snippet tvs:
 * Robots Index this Page - Include or exclude the page in Search Engines
 * Robots - Following Links - Follow or noFollow links on the page
 * Sitemap exclude - Include or exclude the page in Google SiteMap
