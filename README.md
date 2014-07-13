@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo RC 1.1
+### Seo4Evo RC 2.0
 
 Collections of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
@@ -75,18 +75,13 @@ Add [[Seo4Evo]] after the opening <head> tag in your template
 # On page settings (tvs)
 
 * linkAuth your google author page
-
 * CustomTitle - Seo Custom Title for metatag title - Default value is [*pagetitle*]
-
 * Meta Description - If Empty get the first 25 words from content 
 Using DynamicDescription snippet:
 http://modx.com/extras/package/dynamicdescription 
-
 * Meta Keywords - Meta Keywords - comma separated keywords
-
 * CanonicalUrl - Custom CanonicalUrl - If Empty full alias for pages or domain url for homepage - works like using if snippet :
 <link rel="canonical" href="[[if? &is=`[*id*]:is:1` &then=`[(site_url)]` &else=`[(site_url)][~[*id*]~]`]]" />
-
 * 301 Redirects - Add old url - Url redirect using Virtual Alias Plugin.
 http://www.stanback.net/code/modx/virtual-aliases.html 
 New aliases should each be added on a separate line. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
