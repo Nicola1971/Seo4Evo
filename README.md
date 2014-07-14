@@ -50,7 +50,8 @@ Collections of SEO Tools for MODx Evolution from various authors with a dedicate
 * Internet Media Type: text/xml
 * Rich text: no
 * Resource content: ``````[!SiteMap? &amp;format=`sp`  &excludeTemplates=`blank` &excludeTV=`sitemap_exclude` &priority=`sitemap_priority` &changefreq=`sitemap_changefreq` &excludeWeblinks=`true`!]``````
-###### see: http://wiki.modxcms.com/index.php/SiteMap:_Google_sitemaps_in_MODx
+
+###### more infos at: http://wiki.modxcms.com/index.php/SiteMap:_Google_sitemaps_in_MODx
 
 
 # Snippet Call
