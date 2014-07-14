@@ -4,7 +4,7 @@ Seo4Evo
 
 Collections of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
-![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC1.1.jpg)
+![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC2.jpg)
 
 # This Package includes   
 
@@ -54,7 +54,17 @@ Collections of SEO Tools for MODx Evolution from various authors with a dedicate
 
 
 # Snippet Call
-Add [[Seo4Evo]] after the opening <head> tag in your template
+
+* Add Seo4Evo snippet call after the opening <head> tag in your template
+
+###Basic call - only site metatags
+`[[Seo4Evo]]`
+
+###With Facebook Open Graph metatags
+```[[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article`]]```
+
+###With Facebook Open Graph e Google plus metatags
+```[[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789`]]```
 
 
 ## Snippet Call Parameters:
