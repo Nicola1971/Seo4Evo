@@ -2,7 +2,7 @@ Seo4Evo
 =======
 ### Seo4Evo RC 2.0
 
-Collections of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
+Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
 ![seo tab](https://raw.githubusercontent.com/Nicola1971/Seo4Evo/master/seo4evo-RC2.jpg)
 
