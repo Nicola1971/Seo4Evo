@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo RC 2.0
+### Seo4Evo RC 2.1
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
@@ -99,6 +99,16 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
 
 ## Snippet Call Parameters:
+* **preTitle** - pre Title ie
+* **postTitle** - pre Title ie
+
+Example:
+
+``[[Seo4Evo? &preTitle=`[(site_name)] |` &postTitle=`> [(site_name)]`]]``
+
+Result:
+
+`<title>Test Site | My custom SEO Title > Test Site</title>`
 
 ### Facebook Open Graph Protocol Parameters
 
