@@ -116,7 +116,6 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 # On page settings (tvs)
 
 #### Seo4Evo Snippet tvs:
-* **linkAuth** - your google author page
 * **CustomTitle** - Seo Custom Title for metatag title - Default value is [*pagetitle*]
 * **Meta Keywords** - Meta Keywords - comma separated keywords
 * **CanonicalUrl** - Custom CanonicalUrl - If Empty full alias for pages or domain url for homepage - works like using if snippet :
