@@ -12,7 +12,7 @@ Collection of SEO Tools for MODx Evolution from various authors with a dedicated
 * **Virtual Alias**: http://www.stanback.net/code/modx/virtual-aliases.html
 
 ## Snippets:
-* **Seo4Evo**: Returns HTML meta tags for SEO4EVO Package 
+* **Seo4Evo**: Returns HTML meta tags for SEO4EVO Package tvs
 * **Sitemap Snippet**: http://modx.com/extras/package/sitemap
 * **DynamicDescription** http://modx.com/extras/package/dynamicdescription
 
@@ -40,7 +40,28 @@ Collection of SEO Tools for MODx Evolution from various authors with a dedicated
 * set all **Seo4Evo template variables**  for access to you template
 * copy the code from **mm demo rules SEO** in your default mm rules chunk
 
-# Create a sitemap page
+# Seo4Evo snippet 
+Returns HTML meta tags for SEO4EVO Packages tvs
+
+* meta charset
+* base href
+* title
+* keywords
+* description
+* robots
+* copyright
+* canonical
+* og:site_name (facebook)
+* og:type (facebook)
+* og:url (facebook)
+* og:image (facebook)
+* fb:app_id (facebook)
+* author (google+)
+* publisher (google+)
+
+
+# Sitemap snippet 
+## Create a sitemap page
 ### Create a new resource :
 
 * title: sitemap
