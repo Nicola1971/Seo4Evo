@@ -99,8 +99,8 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
 
 ## Snippet Call Parameters:
-* **preTitle** - pre Title ie
-* **postTitle** - pre Title ie
+* **preTitle** - pre Title 
+* **postTitle** - pre Title 
 
 Example:
 
