@@ -132,14 +132,14 @@ Result:
 ``<link rel="canonical" href="[[if? &is=`[*id*]:is:1` &then=`[(site_url)]` &else=`[(site_url)][~[*id*]~]`]]" />``
 * **Author** -  Google plus author page URL (if empty does not display the tag)
 * **Meta Description** - If Empty get the first 25 words from content (via $modx->runSnippet **DynamicDescription Snippet**)
+* **Robots Index this Page** - Include or exclude the page in Search Engines
+* **Robots - Following Links** - Follow or noFollow links on the page
 
 #### Virtual Alias Plugin tvs:
 * **301 Redirects** - Add old url - New aliases should each be added on a **separate line**. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
 
 
 #### SiteMap Snippet tvs:
-* **Robots Index this Page** - Include or exclude the page in Search Engines
-* **Robots - Following Links** - Follow or noFollow links on the page
 * **Sitemap exclude** - Include or exclude the page in Google SiteMap
 * **Sitemap update frequency** - How often the content will be changed
 * **Sitemap Priority** - Importance of the page
