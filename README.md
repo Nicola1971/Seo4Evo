@@ -29,7 +29,7 @@ Returns HTML meta tags for SEO4EVO Packages tvs
 * publisher (google+)
 
 #### Sitemap Snippet 
-* Outpust a machine readable site map for search engines and robots
+* Output a machine readable site map for search engines and robots
 http://modx.com/extras/package/sitemap
 
 #### DynamicDescription
