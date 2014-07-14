@@ -15,3 +15,5 @@ mm_moveFieldsToTab('CustomTitle,MetaDescription,MetaKeywords,CanonicalUrl,Aliase
 if ($modx->db->getValue($modx->db->select('count(id)', $modx->getFullTableName('site_tmplvars'), "name='MetaKeywords'"))) {
 	mm_widget_tags('MetaKeywords',',');
 }
+mm_ddMaxLength('MetaDescription', '', '', 350);
+mm_ddMaxLength('CustomTitle', '', '', 70);
