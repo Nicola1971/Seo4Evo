@@ -120,11 +120,11 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * **Meta Keywords** - Meta Keywords - comma separated keywords
 * **CanonicalUrl** - Custom CanonicalUrl - If Empty full alias for pages or domain url for homepage - works like using if snippet :
 ``<link rel="canonical" href="[[if? &is=`[*id*]:is:1` &then=`[(site_url)]` &else=`[(site_url)][~[*id*]~]`]]" />``
-* **301 Redirects** - Add old url - Url redirect using Virtual Alias Plugin.
-http://www.stanback.net/code/modx/virtual-aliases.html 
-New aliases should each be added on a **separate line**. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
 * **Author** -  Google plus author page URL (if empty does not display the tag)
 * **Meta Description** - If Empty get the first 25 words from content (via $modx->runSnippet **DynamicDescription Snippet**)
+
+#### Virtual Alias Plugin tvs:
+* **301 Redirects** - Add old url - New aliases should each be added on a **separate line**. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
 
 
 #### SiteMap Snippet tvs:
