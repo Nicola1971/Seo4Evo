@@ -1,7 +1,7 @@
 /**
  * Seo4Evo
  *
- * Returns HTML meta tags for SEO4EVO Package
+ * Returns HTML meta tags for SEO4EVO Package v.RC2.1
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
@@ -21,6 +21,7 @@
 |   Insert [[Seo4Evo]] anywhere in the head section of your template.
 | ---------------------------------------------------------------------------
 
+*/
 */
 $MetaKeywords ="";
 // Keywords displayed on all pages
@@ -43,15 +44,17 @@ $id = $modx -> documentObject['id'];
 $url = $modx->makeUrl($id, '', '', 'full');
 
 // *** TITLE ***
+$preTitle = isset($preTitle) ? $preTitle : '';
+$postTitle = isset($postTitle) ? $postTitle : '';
 
 $pagetitle = $modx->documentObject['pagetitle'];
 $CTitle = $modx->getTemplateVarOutput('CustomTitle',$id);
 $Custom = $CTitle['CustomTitle'];
 
 if(!$Custom == ""){
-$MetaTitle = " <title>$Custom</title>\n";
+$MetaTitle = " <title>$preTitle $Custom $postTitle</title>\n";
 } else {
-      $MetaTitle = " <title>$pagetitle</title>\n";
+      $MetaTitle = " <title>$preTitle $pagetitle $postTitle</title>\n";
    }
 
 // *** CHARSET***
@@ -143,3 +146,4 @@ if ($GooglePlus >= 1) {
 
 return $output;
 //?>
+?>
