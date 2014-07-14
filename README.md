@@ -12,7 +12,7 @@ Collections of SEO Tools for MODx Evolution from various authors with a dedicate
 * **Virtual Alias**: http://www.stanback.net/code/modx/virtual-aliases.html
 
 ## Snippets:
-* **Seo4Evo**: Returns HTML meta tags for SEO4EVO Package (based on MetaTagsExtra by Soda http://modx.com/extras/package/metatagsextra) 
+* **Seo4Evo**: Returns HTML meta tags for SEO4EVO Package 
 * **Sitemap Snippet**: http://modx.com/extras/package/sitemap
 * **DynamicDescription** http://modx.com/extras/package/dynamicdescription
 
