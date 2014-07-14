@@ -8,13 +8,39 @@ Collection of SEO Tools for MODx Evolution from various authors with a dedicated
 
 # This Package includes   
 
-## Plugins:
-* **Virtual Alias**: http://www.stanback.net/code/modx/virtual-aliases.html
-
 ## Snippets:
-* **Seo4Evo**: Returns HTML meta tags for SEO4EVO Package tvs
-* **Sitemap Snippet**: http://modx.com/extras/package/sitemap
-* **DynamicDescription** http://modx.com/extras/package/dynamicdescription
+### Seo4Evo snippet 
+Returns HTML meta tags for SEO4EVO Packages tvs
+
+* meta charset
+* base href
+* title
+* keywords
+* description
+* robots
+* copyright
+* canonical
+* og:site_name (facebook)
+* og:type (facebook)
+* og:url (facebook)
+* og:image (facebook)
+* fb:app_id (facebook)
+* author (google+)
+* publisher (google+)
+
+#### Sitemap Snippet 
+* Outpust a machine readable site map for search engines and robots
+http://modx.com/extras/package/sitemap
+
+#### DynamicDescription
+* Creates a dynamic description of the first $n words in $conten
+http://modx.com/extras/package/dynamicdescription
+
+## Plugins:
+### Virtual Alias
+* Virtual Aliases is a plugin which, as the name implies, allows multiple aliases to be defined for a single MODx document
+http://www.stanback.net/code/modx/virtual-aliases.html
+
 
 ## Chunks:
 * **mm demo rules SEO** (sample code for ManagerManager plugin the Seo Tab)
@@ -40,24 +66,7 @@ Collection of SEO Tools for MODx Evolution from various authors with a dedicated
 * set all **Seo4Evo template variables**  for access to you template
 * copy the code from **mm demo rules SEO** in your default mm rules chunk
 
-# Seo4Evo snippet 
-Returns HTML meta tags for SEO4EVO Packages tvs
 
-* meta charset
-* base href
-* title
-* keywords
-* description
-* robots
-* copyright
-* canonical
-* og:site_name (facebook)
-* og:type (facebook)
-* og:url (facebook)
-* og:image (facebook)
-* fb:app_id (facebook)
-* author (google+)
-* publisher (google+)
 
 
 # Sitemap snippet 
