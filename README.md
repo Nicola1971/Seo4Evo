@@ -33,7 +33,7 @@ Returns HTML meta tags for SEO4EVO Packages tvs
 http://modx.com/extras/package/sitemap
 
 #### DynamicDescription
-* Creates a dynamic description of the first $n words in $conten
+* Creates a dynamic description of the first $n words in $content
 http://modx.com/extras/package/dynamicdescription
 
 ## Plugins:
