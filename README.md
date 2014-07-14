@@ -52,7 +52,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * **GoogleAuthor**
 * **MetaDescription** (metatag description)
 * **MetaKeywords** (metatag keywords)
-* **CustomTitle** (cmetatag title)
+* **CustomTitle** (metatag title)
 * **RobotsFollow** (setting for metatag robots)
 * **RobotsIndex** (setting for metatag robots)
 * **sitemap_changefreq** (setting for Sitemap Snippet)
