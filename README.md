@@ -48,13 +48,13 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 ## Tvs
 
 * **Aliases** (301 redirect urls for Virtual Alias)
-* **CanonicalUrl** 
-* **GoogleAuthor**
-* **MetaDescription** (metatag description)
-* **MetaKeywords** (metatag keywords)
-* **CustomTitle** (metatag title)
-* **RobotsFollow** (setting for metatag robots)
-* **RobotsIndex** (setting for metatag robots)
+* **CanonicalUrl** (setting for Seo4Evo)
+* **GoogleAuthor** (setting for Seo4Evo)
+* **MetaDescription** (setting for Seo4Evo)
+* **MetaKeywords** (setting for Seo4Evo)
+* **CustomTitle** (setting for Seo4Evo)
+* **RobotsFollow** (setting for Seo4Evo)
+* **RobotsIndex** (setting for Seo4Evo)
 * **sitemap_changefreq** (setting for Sitemap Snippet)
 * **sitemap_exclude** (setting for Sitemap Snippet)
 * **sitemap_priority** (setting for Sitemap Snippet)
