@@ -61,7 +61,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
 # Install
 
-* With **Package Managerv
+* With **Package Manager
 
 * set all **Seo4Evo template variables**  for access to you template
 * copy the code from **mm demo rules SEO** in your default mm rules chunk
