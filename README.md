@@ -84,9 +84,7 @@ Add [[Seo4Evo]] after the opening <head> tag in your template
 http://www.stanback.net/code/modx/virtual-aliases.html 
 New aliases should each be added on a **separate line**. Omit any leading or trailing slashes as well as the default suffix (usaully .html) 
 * **Author** -  Google plus author page URL (if empty does not diesplay the tag)
-
-####  DynamicDescription Snippet tvs:
-* **Meta Description** - If Empty get the first 25 words from content 
+* **Meta Description** - If Empty get the first 25 words from content (via $modx->runSnippet **DynamicDescription Snippet**)
 
 
 #### SiteMap Snippet tvs:
