@@ -23,7 +23,7 @@
 
 */
 //KeywordsTv - custom MetaKeywords tv
-$Keywords = isset($KeywordsTv) ? $KeywordsTv : 'MetaKeywords';
+$Keywords = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
 $MetaKeywords ="";
 // Keywords displayed on all pages
 // default is the $all_page_keywords parameter, else uncomment the line of your choice:
