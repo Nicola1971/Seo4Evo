@@ -125,7 +125,7 @@ $CanonicalUrl = $CUrl['CanonicalUrl'];
 if(!$CanonicalUrl == ""){
 $Canonical = " <link rel=\"canonical\" href=\"$CanonicalUrl\" />\n";
 } else {
-$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? '<link rel="canonical" href="[(site_url)]" />' : '<link rel="canonical" href="[(site_url)][~[*id*]~]" />';
+	$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? " <link rel=\"canonical\" href=\"[(site_url)]\" />" : " <link rel=\"canonical\" href=\"[(site_url)][~[*id*]~]\" />\n";
 }
 
 // *** RETURN RESULTS ***
