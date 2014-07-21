@@ -1,10 +1,12 @@
 /**
  * Seo4Evo
  *
- * Returns HTML meta tags for SEO4EVO Package v RC.2.1.1
+ * Seo4Evo RC.2.2 - Manage and return Meta Tags using modx Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
+ * @version     RC 2.2
+ * @author      Author: Nicola71 http://www.tattoocms.it/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 
@@ -12,13 +14,21 @@
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
-| Snippet Version:  RC2
+| Snippet Version:  RC2.2
 |
 | Description:
-| Returns HTML meta tags from Seo4Evo Package
+| Manage and return Meta Tags using modx Tvs from Seo4Evo Package
 |
 | Usage:
-|   Insert [[Seo4Evo]] anywhere in the head section of your template.
+|  Insert [[Seo4Evo]] anywhere in the head section of your template.
+|  with custom MetaTags Tv (for old sites)
+|  [[Seo4Evo? &KeywordsTv=`documentTags`]]
+|
+|  With Facebook Open Graph metatags
+| [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article`]]
+|
+| With Facebook Open Graph e Google plus metatags
+| [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789`]]
 | ---------------------------------------------------------------------------
 
 */

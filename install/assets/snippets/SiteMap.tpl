@@ -1,24 +1,17 @@
 /**
  * SiteMap
  *
- * SiteMap version 1.0.11
+ * Outputs a machine readable site map for search engines and robots.
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
+ * @version     1.0.11
+ * @author Grzegorz Adamiak [grad], ncrossland, DivanDesign (http://www.DivanDesign.biz)
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 //<?php
 /**
- * Sitemap
- *
  * Outputs a machine readable site map for search engines and robots.
- *
- * @category snippet
- * @version 1.0.11 (2012-10-01)
- * @license LGPL
- * @author Grzegorz Adamiak [grad], ncrossland, DivanDesign (http://www.DivanDesign.biz)
- * @internal @modx_category Navigation
- *
  * @param startid {integer} - Id of the 'root' document from which the sitemap starts. Default: 0.
  * @param format {string} - Which format of sitemap to use: sp (Sitemap Protocol used by Google), txt (text file with list of URLs), ror (Resource Of Resources). Default: sp.
  * @param seeThruUnpub {0; 1} - See through unpublished documents. Default: 1.

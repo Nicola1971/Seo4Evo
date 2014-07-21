@@ -5,6 +5,8 @@
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
+ * @version     1.0
+ * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 //<?php

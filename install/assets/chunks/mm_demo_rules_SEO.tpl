@@ -1,7 +1,7 @@
 /**
  * mm_demo_rules_SEO
  *
- * example rules for SEO Tab
+ * Seo4Evo example rules for SEO Tab
  *
  * @category	chunk
  * @internal @modx_category Seo4Evo
