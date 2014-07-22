@@ -64,7 +64,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * With **Package Manager
 
 * set all **Seo4Evo template variables**  for access to you template
-* copy the code from **mm demo rules SEO** in your default mm rules chunk
+* copy the code from **Seo4Evo mm rules** in your default mm rules chunk
 
 
 
@@ -101,6 +101,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 ## Snippet Call Parameters:
 * **preTitle** - pre Title 
 * **postTitle** - pre Title 
+* **KeywordsTv** - custom MetaKeywords tv (ie: documentTags)
 
 Example:
 
