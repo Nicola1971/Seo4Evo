@@ -43,7 +43,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
 
 ## Chunks:
-* **mm demo rules SEO** (sample code for ManagerManager plugin the Seo Tab)
+* **Seo4Evo mm rules** (sample code for ManagerManager plugin the Seo Tab)
 
 ## Tvs
 
