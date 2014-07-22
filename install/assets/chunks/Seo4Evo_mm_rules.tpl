@@ -1,10 +1,11 @@
 /**
- * mm_demo_rules_SEO
+ * Seo4Evo_mm_rules
  *
- * Seo4Evo example rules for SEO Tab
+ * Seo4Evo example rules for ManagerManager SEO Tab
  *
  * @category	chunk
  * @internal @modx_category Seo4Evo
+ * @author      Author: Nicola71 http://www.tattoocms.it/
  */
 // copy and paste in you ManageManeger rules chunk
 
