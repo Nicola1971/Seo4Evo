@@ -1,7 +1,7 @@
 /**
  * CustomTitle
  *
- * Seo Custom Title for metatag title - Default value is [*pagetitle*]
+ * Seo Custom Title for metatag title - Default value is pagetitle
  *
  * @category	tv
  * @name        CustomTitle
