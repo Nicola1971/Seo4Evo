@@ -13,4 +13,5 @@
  * @internal	@output_widget
  * @internal	@output_widget_params
  * @internal    @template_assignments *
+ * @internal    @installset sample
  */
