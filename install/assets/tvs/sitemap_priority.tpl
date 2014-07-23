@@ -4,6 +4,7 @@
  * Importance of this page
  *
  * @category	tv
+ * @name        sitemap_priority
  * @internal	@modx_category Seo4Evo
  * @internal    @caption Sitemap Priority
  * @internal    @input_type dropdown
@@ -11,5 +12,5 @@
  * @internal    @input_default 0.5
  * @internal	@output_widget
  * @internal	@output_widget_params
- * @internal    @template_assignments
+ * @internal    @template_assignments *
  */
