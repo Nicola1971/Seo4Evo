@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo RC 2.2
+### Seo4Evo RC 3.0
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
@@ -18,6 +18,7 @@ Returns HTML meta tags for SEO4EVO Packages tvs
 * keywords
 * description
 * robots
+* last modified
 * copyright
 * canonical
 * og:site_name (facebook)
@@ -67,8 +68,6 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * copy the code from **Seo4Evo mm rules** in your default mm rules chunk
 
 
-
-
 # Sitemap snippet 
 ## Create a sitemap page
 ### Create a new resource :
@@ -102,6 +101,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * **preTitle** - pre Title 
 * **postTitle** - pre Title 
 * **KeywordsTv** - custom MetaKeywords tv (ie: documentTags)
+* **all_page_keywords** - chunk or comma separated list of Keywords displayed on all pages 
 
 Example:
 
