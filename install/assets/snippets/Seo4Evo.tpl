@@ -6,7 +6,7 @@
  * @category	snippet
  * @internal	@modx_category Seo4Evo
  * @version     RC 3.0
- * @author      Author: Nicola http://www.tattoocms.it/
+ * @author      Author: Nicola Lambathakis http://www.tattoocms.it/   
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 
