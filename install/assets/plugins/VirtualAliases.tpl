@@ -1,6 +1,6 @@
 //<?
 /**
- * Virtual Aliases
+ * VirtualAliases
  *
  * Allows for an unlimited number of custom aliases per page.
  *
