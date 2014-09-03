@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo RC 3.0
+### Seo4Evo RC 3.1
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 
@@ -102,6 +102,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * **postTitle** - pre Title 
 * **KeywordsTv** - custom MetaKeywords tv (ie: documentTags)
 * **all_page_keywords** - chunk or comma separated list of Keywords displayed on all pages 
+* **MetaDescriptionTv** -  custom description tv - Example: ``` &MetaDescriptionTv=`introtext` ```
 
 Example:
 
@@ -146,5 +147,8 @@ Result:
 * **Sitemap Priority** - Importance of the page
 
  
+#Updates
 
+### RC3.1
+* MetaDescriptionTv -  custom description tv - Example: ``` &MetaDescriptionTv=`introtext` ```
 
