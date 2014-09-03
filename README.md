@@ -62,9 +62,8 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
 # Install
 
-* With **Package Manager
+* With **Package Manager or Store module
 
-* set all **Seo4Evo template variables**  for access to you template
 * copy the code from **Seo4Evo mm rules** in your default mm rules chunk
 
 
