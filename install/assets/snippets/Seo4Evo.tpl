@@ -1,20 +1,19 @@
 /**
  * Seo4Evo
  *
- * Seo4Evo RC 3.0 - Manage and return Meta Tags using modx Tvs
+ * Seo4Evo RC 3.1 - Manage and return Meta Tags using modx Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     RC 3.0
- * @author      Author: Nicola Lambathakis http://www.tattoocms.it/   
+ * @version     RC 3.1
+ * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  */
 
-//<?
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
-| Snippet Version:  RC 3.0
+| Snippet Version:  RC 3.1
 |
 | Description:
 | Manage and return Meta Tags using modx Tvs from Seo4Evo Package
@@ -22,6 +21,7 @@
 | Basic Snippet Parameters:
 |
 | KeywordsTv - custom keywords tv - Example: &KeywordsTv=`documentTags`
+| MetaDescriptionTv -  custom description tv - Example: &MetaDescriptionTv=`introtext`
 | all_page_keywords - chunk or comma separated list of Keywords displayed on all pages - Example: &all_page_keywords=`modx, snippets, plugins`
 | preTitle -  custom pre title - Example: &preTitle &preTitle=`[(site_name)] |`
 | postTitle -  custom post title - Example:  &postTitle=`| [(site_name)]`
@@ -51,6 +51,7 @@
 
 */
 $Keywords = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
+$MetaDescriptionTv = isset($MetaDescriptionTv) ? $MetaDescriptionTv : 'MetaDescription';
 $MetaKeywords ="";
 $comma=(isset($all_page_keywords))?', ':'';
 // *** KEYWORDS ***
@@ -87,7 +88,7 @@ $BaseUrl = " <base href=\"[(site_url)]\" />\n";
 $dyndesc = $modx->runSnippet(
         "DynamicDescription",
         array(
-            "descriptionTV" => "MetaDescription",
+            "descriptionTV" => "$MetaDescriptionTv",
 			"maxWordCount=" => "25"
         )
 );
@@ -153,5 +154,3 @@ if ($GooglePlus >= 1) {
 }
 
 return $output;
-//?>
-?>
