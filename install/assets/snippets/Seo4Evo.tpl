@@ -8,6 +8,7 @@
  * @version     RC 3.1
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
+ * @internal @installset base, sample  
  */
 
 /**

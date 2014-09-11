@@ -8,6 +8,7 @@
  * @version     1.0.11
  * @author Grzegorz Adamiak [grad], ncrossland, DivanDesign (http://www.DivanDesign.biz)
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
+ * @internal @installset base, sample  
  */
 //<?php
 /**

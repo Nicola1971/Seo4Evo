@@ -8,6 +8,7 @@
  * @version     1.0
  * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
+ * @internal @installset base, sample  
  */
 //<?php
 /**

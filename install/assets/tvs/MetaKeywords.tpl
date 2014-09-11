@@ -13,5 +13,5 @@
  * @internal	@output_widget delim
  * @internal	@output_widget_params &format=,
  * @internal    @template_assignments *
- * @internal    @installset sample
+ * @internal @installset base, sample
  */

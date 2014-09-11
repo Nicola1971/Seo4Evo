@@ -6,6 +6,7 @@
  * @category	chunk
  * @internal @modx_category Seo4Evo
  * @author      Author: Nicola71 http://www.tattoocms.it/
+ * @internal @installset base, sample  
  */
 // copy and paste in you ManageManeger rules chunk
 
