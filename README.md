@@ -3,7 +3,7 @@ Seo4Evo
 ### Seo4Evo RC 3.2
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
-More infos and docs here:
+####More infos and docs here:
 http://www.tattoocms.it/extras/packages/seo4evo.html
 
 ![seo tab](https://raw.githubusercontent.com/Nicola1971/training-materials/master/Images/seo/seo4evo-tab.jpg)
