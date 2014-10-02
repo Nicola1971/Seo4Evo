@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo RC 3.2
+### Seo4Evo 2.1 PL
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 ####More infos and docs here:
@@ -23,6 +23,9 @@ http://modx.com/extras/package/sitemap
 http://modx.com/extras/package/dynamicdescription
 
 ## Plugins:
+### GoogleAnalytics plugin 2.0 
+https://github.com/Nicola1971/GoogleAnalytics-Plugin
+
 ### Virtual Alias
 * Virtual Aliases is a plugin which, as the name implies, allows multiple aliases to be defined for a single MODx document
 http://www.stanback.net/code/modx/virtual-aliases.html
@@ -30,8 +33,6 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
  
 #Updates
-### RC3.2
-* Se4evo snippet - removed trailing slash for HTML5 
-### RC3.1
-* Se4evo snippet - MetaDescriptionTv -  custom description tv - Example: ``` &MetaDescriptionTv=`introtext` ```
+### 2.1 PL Added GoogleAnalytics plugin 2.0 
+
 
