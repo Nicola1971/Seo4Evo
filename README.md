@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo 2.1 PL
+### Seo4Evo 2.1.1 PL
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 ####More infos and docs here:
@@ -33,6 +33,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
  
 #Updates
+### 2.1.1 PL Analytics plugin 2.0.1
 ### 2.1 PL Added GoogleAnalytics plugin 2.0 
 
 
