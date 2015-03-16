@@ -6,16 +6,14 @@
  * @category	chunk
  * @internal @modx_category Seo4Evo
  * @author      Author: Nicola71 http://www.tattoocms.it/
- * @internal @installset base, sample  
+ * @internal @installset base, sample
  */
 // copy and paste in you ManageManeger rules chunk
 
 
-//seo tab
-mm_createTab('Seo','Seo', '', $news_tpl, '', '600');
-mm_moveFieldsToTab('CustomTitle,MetaDescription,MetaKeywords,CanonicalUrl,Aliases,GoogleAuthor,RobotsIndex,RobotsFollow,sitemap_exclude,sitemap_changefreq,sitemap_priority', 'Seo', '', $news_tpl);
-if ($modx->db->getValue($modx->db->select('count(id)', $modx->getFullTableName('site_tmplvars'), "name='MetaKeywords'"))) {
-	mm_widget_tags('MetaKeywords',',');
-}
+//Seo tab
+mm_createTab('Seo','Seo', '', '', '', '600');
+mm_moveFieldsToTab('CustomTitle,MetaDescription,MetaKeywords,CanonicalUrl,Aliases,GoogleAuthor,RobotsIndex,RobotsFollow,sitemap_exclude,sitemap_changefreq,sitemap_priority', 'Seo', '', '');
+mm_widget_tags('MetaKeywords'); // Give blog tag editing capabilities to the 'MetaKeywords' TV
 mm_ddMaxLength('MetaDescription', '', '', 350);
 mm_ddMaxLength('CustomTitle', '', '', 70);
