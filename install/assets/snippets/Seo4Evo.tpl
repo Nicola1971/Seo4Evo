@@ -1,4 +1,17 @@
 /**
+ * Seo4Evo
+ *
+ * Seo4Evo RC 3.2 - Manage and return Meta Tags using modx Tvs
+ *
+ * @category	snippet
+ * @internal	@modx_category Seo4Evo
+ * @version     RC 3.2
+ * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
+ * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
+ * @internal @installset base, sample
+ */
+
+/**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
 | Snippet Version:  RC 3.2
