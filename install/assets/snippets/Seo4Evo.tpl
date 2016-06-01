@@ -1,17 +1,4 @@
 /**
- * Seo4Evo
- *
- * Seo4Evo RC 3.2 - Manage and return Meta Tags using modx Tvs
- *
- * @category	snippet
- * @internal	@modx_category Seo4Evo
- * @version     RC 3.2
- * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
- * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
- * @internal @installset base, sample
- */
-
-/**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
 | Snippet Version:  RC 3.2
@@ -75,9 +62,9 @@ $CTitle = $modx->getTemplateVarOutput('CustomTitle',$id);
 $Custom = $CTitle['CustomTitle'];
 
 if(!$Custom == ""){
-$MetaTitle = "<title>$preTitle$Custom$postTitle</title>\n";
+$MetaTitle = "<title>".$preTitle.$Custom.$postTitle."</title>\n";
 } else {
-      $MetaTitle = "<title>$preTitle$pagetitle$postTitle</title>\n";
+      $MetaTitle = "<title>".$preTitle.$pagetitle.$postTitle."</title>\n";
    }
 
 // *** Meta Charset***
@@ -89,12 +76,12 @@ $BaseUrl = "<base href=\"[(site_url)]\">\n";
 $dyndesc = $modx->runSnippet(
         "DynamicDescription",
         array(
-            "descriptionTV" => "$MetaDescriptionTv",
+            "descriptionTV" => $MetaDescriptionTv,
 			"maxWordCount=" => "25"
         )
 );
 
-$MetaDesc = "<meta name=\"description\" content=\"$dyndesc\">\n";
+$MetaDesc = "<meta name=\"description\" content=\"".$dyndesc."\">\n";
 
 // *** Meta Robots***
 $MetaRobots = "<meta name=\"robots\" content=\"[*RobotsIndex*], [*RobotsFollow*]\">\n";
@@ -104,29 +91,34 @@ $MetaCopyright = "<meta name=\"copyright\" content=\"[(site_name)]\">\n";
 
 // *** Last Modified ***
 $editedon = date(r,$modx->documentObject['editedon']);
-$MetaEditedOn = "<meta http-equiv=\"last-modified\" content=\"$editedon\">\n";
+$MetaEditedOn = "<meta http-equiv=\"last-modified\" content=\"".$editedon."\">\n";
 
 // ** FACEBOOK OPEN GRAPH PROTOCOL
 
 $imageUrl = isset($OGimageTv) ? $OGimageTv : 'thumbnail';
 $type = isset($OGtype) ? $OGtype : 'website';
+$title = isset($OGtitle) ? $OGtitle : $preTitle.$Custom.$postTitle;
+$description = isset($OGdescription) ? $OGdescription : $dyndesc;
+
 
 $MetaProperty = "<meta property=\"og:site_name\" content=\"[(site_name)]\">\n";
-$MetaPropertyType = "<meta property=\"og:type\" content=\"$type\">\n";
-$MetaPropertyUrl = "<meta property=\"og:url\" content=\"$url\">\n";
+$MetaPropertyType = "<meta property=\"og:type\" content=\"".$type."\">\n";
+$MetaPropertyTitle = "<meta property=\"og:title\" content=\"".$title."\">\n";
+$MetaPropertyDescription = "<meta property=\"og:description\" content=\"".$description."\">\n";
+$MetaPropertyUrl = "<meta property=\"og:url\" content=\"".$url."\">\n";
 $MetaPropertyImage = "<meta property=\"og:image\" content=\"[(site_url)][*$imageUrl*]\">\n";
 
-$MetaPropertyFbApp = "<meta property=\"fb:app_id\" content=\"$OGfbappId\">\n";
+$MetaPropertyFbApp = "<meta property=\"fb:app_id\" content=\"".$OGfbappId."\">\n";
 
 //Google Plus
 
 $linkPub = isset($linkPub) ? $linkPub : '';
-$LinkPublisher = "<link rel=\"publisher\" href=\"$linkPub\">\n";
+$LinkPublisher = "<link rel=\"publisher\" href=\"".$linkPub."\">\n";
 
 $GAuthor = $modx->getTemplateVarOutput('GoogleAuthor',$id);
 $GoogleAthorship = $GAuthor['GoogleAuthor'];
 if(!$GoogleAthorship == ""){
-$LinkAuthor = "<link rel=\"author\" href=\"$GoogleAthorship\">\n";
+$LinkAuthor = "<link rel=\"author\" href=\"".$GoogleAthorship."\">\n";
 }
 
 //*** Canonical**//
@@ -137,7 +129,7 @@ $CUrl = $modx->getTemplateVarOutput('CanonicalUrl',$id);
 $CanonicalUrl = $CUrl['CanonicalUrl'];
 
 if(!$CanonicalUrl == ""){
-$Canonical = "<link rel=\"canonical\" href=\"$CanonicalUrl\">\n";
+$Canonical = "<link rel=\"canonical\" href=\"".$CanonicalUrl."\">\n";
 } else {
 	$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? "<link rel=\"canonical\" href=\"[(site_url)]\" />" : "<link rel=\"canonical\" href=\"[(site_url)][~[*id*]~]\">\n";
 }
@@ -147,7 +139,7 @@ $Canonical = "<link rel=\"canonical\" href=\"$CanonicalUrl\">\n";
 $output = $MetaCharset.$BaseUrl.$MetaTitle.$MetaKeywords.$MetaDesc.$MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
 //return OpenGraph metatags if OpenGraph=1
 if ($OpenGraph >= 1) {
-    $output .= $MetaProperty.$MetaPropertyType.$MetaPropertyUrl.$MetaPropertyImage.$MetaPropertyFbApp;
+    $output .= $MetaProperty.$MetaPropertyType.$MetaPropertyTitle.$MetaPropertyDescription.$MetaPropertyUrl.$MetaPropertyImage.$MetaPropertyFbApp;
 }
 //return Google plus metatags if GooglePlus=1
 if ($GooglePlus >= 1) {
