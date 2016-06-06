@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo 2.1.2 PL
+### Seo4Evo 2.1.3 PL
 
 Collection of SEO Tools for MODx Evolution from various authors with a dedicated ManagerManager Tab
 ####More infos and docs here:
