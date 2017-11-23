@@ -147,19 +147,41 @@ unset ($output, $allTemplates, $excludeTemplates);
 # ---------------------------------------------
 
 switch ($format){
-	// Next case added in version 1.0.4
-	case 'ulli': // UL List
-		$output .= "<ul class=\"sitemap\">\n";
-		// TODO: Sort the array on Menu Index
-		// TODO: Make a nested ul-li based on the levels in the document tree.
-		foreach ($docs as $doc){
-			$s  = "  <li class=\"sitemap\">";
-			$s .= "<a href=\"".($doc['id'] != $modx->config['site_start']) ? '[(site_url)][~'.$doc['id'].'~]' : '[(site_url)]'."\" class=\"sitemap\">" . $doc['pagetitle'] . "</a>";
-			$s .= "</li>\n";
-			$output .= $s;
+	function buildTree(array $elements, $parentId = 0) {
+		$branch = array();
+		foreach ($elements as $element) {
+			if($element['parent'] == $parentId) {
+				$children = buildTree($elements, $element['id']);
+				if ($children) {
+					$menuindex = array();
+					foreach($children as $k => $v) {
+						$menuindex[$k] = $v['menuindex'];	
+					}
+					array_multisort($menuindex,SORT_ASC,$children);
+					$element['children'] = $children;
+				}
+				$branch[] = $element;
+			}
 		}
-
+		return $branch;
+	}
+	function renderTree(array $elements) {
+		global $modx;
+		$output .= "<ul class=\"sitemap\">\n";
+		foreach($elements as $doc) {
+			$link = $doc['id'] != $modx->config['site_start'] ? '[(site_url)][~'.$doc['id'].'~]' : '[(site_url)]';
+			$output	.= '<li>';
+			$output .= '<a href="'.$link.'">'.$doc['pagetitle'].'</a>';
+			if(isset($doc['children'])) {
+				$output .= renderTree($doc['children']);	
+			}
+			$output .= '</li>';
+		}
 		$output .= "</ul>\n";
+		return $output;
+	}
+	$tree = buildTree($docs);
+	$output .= renderTree($tree);
 	break;
 
 	case 'txt': // plain text list of URLs
@@ -234,10 +256,10 @@ function getDocs($modx, $startid, $priority, $changefreq, $excludeTV, $seeThruUn
 	//If need to see through unpublished
 	if ($seeThruUnpub){
 		//Get all children documents, filter later
-		$docs = $modx->getAllChildren($startid, 'menuindex', 'asc', 'id,editedon,template,published,searchable,pagetitle,type');
+		$docs = $modx->getAllChildren($startid, 'menuindex', 'asc', 'id,editedon,template,published,searchable,pagetitle,type,parent,menuindex');
 	}else{
 		//Get only published children documents
-		$docs = $modx->getActiveChildren($startid, 'menuindex', 'asc', 'id,editedon,template,published,searchable,pagetitle,type');
+		$docs = $modx->getActiveChildren($startid, 'menuindex', 'asc', 'id,editedon,template,published,searchable,pagetitle,type,parent,menuindex');
 	}
 
 	// add sub-children to the list
