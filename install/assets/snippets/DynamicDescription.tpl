@@ -127,11 +127,14 @@ if (!function_exists(getDynaDescription)) {
     $text = str_replace("\n",' ',$text);
     $text = str_replace("\r",' ',$text);
     /* remove entity chars */
-    $text = preg_replace('~&.+;~U',' ',$text);
+    //$text = preg_replace('~&.+;~U',' ',$text);
+	$text = html_entity_decode($text,ENT_HTML5,'UTF-8');	
     /* remove special MODx tags - chunks, snippets, etc.
      * If we don't do this they'll end up expanded in the description.
      */
     $text = $modx->stripTags($text);
+	/* remove empty spaces */
+	$text= preg_replace('|\s+|', ' ', $text);
     $words = preg_split ("/\s+/", $text,$excerpt_length+1);
     if (count($words) > $excerpt_length) {
       array_pop($words);
@@ -141,7 +144,6 @@ if (!function_exists(getDynaDescription)) {
     return trim(stripslashes($text));
   }
 }
-
 if (!empty($descriptionTV)) {
   // if the $descriptionTV is not empty then we just print it with
   // no extra processing, it's up to you to manage your description
