@@ -128,7 +128,7 @@ if (!function_exists(getDynaDescription)) {
     $text = str_replace("\r",' ',$text);
     /* remove entity chars */
     //$text = preg_replace('~&.+;~U',' ',$text);
-	$text = html_entity_decode($text,ENT_HTML5,'UTF-8');	
+    $text = html_entity_decode($text,ENT_HTML5,'UTF-8');	
     /* remove special MODx tags - chunks, snippets, etc.
      * If we don't do this they'll end up expanded in the description.
      */
