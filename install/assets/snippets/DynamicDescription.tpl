@@ -133,8 +133,8 @@ if (!function_exists(getDynaDescription)) {
      * If we don't do this they'll end up expanded in the description.
      */
     $text = $modx->stripTags($text);
-	/* remove empty spaces */
-	$text= preg_replace('|\s+|', ' ', $text);
+    /* remove empty spaces */
+    $text= preg_replace('|\s+|', ' ', $text);
     $words = preg_split ("/\s+/", $text,$excerpt_length+1);
     if (count($words) > $excerpt_length) {
       array_pop($words);
