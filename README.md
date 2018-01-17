@@ -44,7 +44,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * Some code fix
 
 ### 2.1.3 RC 
-* Add og:title, og:description by Serg28 https://github.com/Nicola1971/Seo4Evo/pull/7/files
+* Add og:title, og:description by [Serg28](https://github.com/Serg28)
 ### 2.1.1 RC 
 * Analytics plugin 2.0.1
 ### 2.1 RC 
