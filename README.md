@@ -3,7 +3,9 @@ Seo4Evo
 ### Seo4Evo v1.0.1
 
 Collection of SEO Tools for Evolution CMS from various authors with a dedicated ManagerManager Tab
-####More infos and docs here:
+
+#### More infos and docs here:
+
 http://www.tattoocms.it/extras/packages/seo4evo.html
 
 ![seo4evo-101](https://user-images.githubusercontent.com/7342798/35049398-2c43ebce-fba0-11e7-84f4-389bc65853a0.png)
