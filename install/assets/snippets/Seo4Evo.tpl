@@ -1,31 +1,37 @@
+<?php
 /**
  * Seo4Evo
  *
- * Seo4Evo RC 3.2 - Manage and return Meta Tags using modx Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     RC 3.2
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
+ * @author      Contributor: risingisland https://github.com/risingisland
+ * @author      Contributor: Serg28 https://github.com/Serg28
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample
+ * @documentation Documentation: http://www.tattoocms.it/extras/packages/seo4evo.html
+ * @documentation Github Repository: https://github.com/Nicola1971/Seo4Evo
+ * @reportissues Report Issues: https://github.com/Nicola1971/Seo4Evo/issues 
+ * @lastupdate  17-01-2018
  */
 
 /**
 | --------------------------------------------------------------------------
-| Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
-| Snippet Version:  RC 3.2
+| Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
 |
 | Description:
 | Manage and return Meta Tags using modx Tvs from Seo4Evo Package
 |
 | Basic Snippet Parameters:
 |
+| Keywords - disable/enable MetaKeywords metatags (default 1 = enabled) - Example: &Keywords=`0`
 | KeywordsTv - custom keywords tv - Example: &KeywordsTv=`documentTags`
 | MetaDescriptionTv -  custom description tv - Example: &MetaDescriptionTv=`introtext`
 | all_page_keywords - chunk or comma separated list of Keywords displayed on all pages - Example: &all_page_keywords=`modx, snippets, plugins`
 | preTitle -  custom pre title - Example: &preTitle &preTitle=`[(site_name)] |`
 | postTitle -  custom post title - Example:  &postTitle=`| [(site_name)]`
+| HeaderExtras - enable meta name="viewport" and meta http-equiv  - Example: &HeaderExtras=`1`
 |
 | ******* Facebook Open Graph  Parameters: ******
 | OpenGraph - enable OG metatags  - Example: &OpenGraph=`1`
@@ -54,13 +60,14 @@
 | ---------------------------------------------------------------------------
 
 */
-$Keywords = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
+$Keywords = isset($Keywords) ? $Keywords : '1';
+$KeywordsTv = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
 $MetaDescriptionTv = isset($MetaDescriptionTv) ? $MetaDescriptionTv : 'MetaDescription';
 $MetaKeywords ="";
 $comma=(isset($all_page_keywords))?', ':'';
 
 // *** KEYWORDS ***//
-$MetaKeywords= "	<meta name=\"keywords\" content=\"{$all_page_keywords}{$comma}{$Keywords}\">\n";
+$MetaKeywords= "	<meta name=\"keywords\" content=\"{$all_page_keywords}{$comma}{$KeywordsTv}\">\n";
 $MetaCharset ="";
 $BaseUrl ="";
 $MetaDesc = "";
@@ -220,7 +227,17 @@ $Icons = "	<!-- Favicons. Generator here: http://www.favicon-generator.org/
 
 // *** RETURN RESULTS ***
 // you can change the order of displayed items:
-$output = $HeaderDesc.$MetaCharset.$BaseUrl.$HeaderExtra.$MetaTitle.$MetaKeywords.$MetaDesc.$MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
+$output = $HeaderDesc.$MetaCharset.$BaseUrl;
+//return HeaderExtra metatags if HeaderExtras=1 
+if ($HeaderExtras >= 1) {
+    $output .= $HeaderExtra;
+}
+$output .= $MetaTitle.$MetaDesc;
+//return Keyword metatags if Keywords=1 (default 1)
+if ($Keywords >= 1) {
+    $output .= $MetaKeywords;
+}
+$output .= $MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
 //return OpenGraph metatags if OpenGraph=1
 if ($OpenGraph >= 1) {
     $output .= $FbDesc.$MetaProperty.$MetaPropertyType.$MetaPropertyTitle.$MetaPropertyDescription.$MetaPropertyUrl.$MetaPropertyImage.$MetaPropertyFbApp;
