@@ -36,7 +36,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
  
 #Updates
 ## 1.0.1 
-* Dropped RC :smile: **4 years of realease candidate are enough**. Previous version will be considered <=1.0
+* Dropped RC :smile: **4 years of release candidate are enough**. Previous version will be considered <=1.0
 * GeoLocation, DublinCore, Favicons, HeaderExtra by  [risingisland](https://github.com/risingisland)
 * Keywords: added option to Disable
 * Updated Sitemap
