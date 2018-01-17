@@ -2,9 +2,11 @@
 /**
  * Seo4Evo
  *
+ * Seo4Evo 1.0.1 - Manage and return Meta Tags using Evolution Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
+ * @version     1.0.1
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @author      Contributor: risingisland https://github.com/risingisland
  * @author      Contributor: Serg28 https://github.com/Serg28
@@ -19,6 +21,7 @@
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
+| Snippet Version:  1.0.1
 |
 | Description:
 | Manage and return Meta Tags using modx Tvs from Seo4Evo Package
