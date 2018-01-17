@@ -41,9 +41,12 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * Fixed DynamicDiscription
 * Some code fix
 
-### 2.1.3 RC Add og:title, og:description by Serg28 https://github.com/Nicola1971/Seo4Evo/pull/7/files
-### 2.1.1 RC Analytics plugin 2.0.1
-### 2.1 RC Added GoogleAnalytics plugin 2.0 
+### 2.1.3 RC 
+* Add og:title, og:description by Serg28 https://github.com/Nicola1971/Seo4Evo/pull/7/files
+### 2.1.1 RC 
+* Analytics plugin 2.0.1
+### 2.1 RC 
+* Added GoogleAnalytics plugin 2.0 
 
 
 
