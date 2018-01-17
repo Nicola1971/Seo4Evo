@@ -40,7 +40,7 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 * GeoLocation, DublinCore, Favicons, HeaderExtra by  [risingisland](https://github.com/risingisland)
 * Keywords: added option to Disable
 * Updated Sitemap
-* Fixed DynamicDescription
+* Fixed DynamicDescription by [kulmjens](https://github.com/kulmjens)
 * Some code fix
 
 ### 2.1.3 RC 
