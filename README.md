@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo v1.0.1
+### Seo4Evo v1.0.2
 
 Collection of SEO Tools for Evolution CMS from various authors with a dedicated ManagerManager Tab
 
