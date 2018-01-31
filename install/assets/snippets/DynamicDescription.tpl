@@ -1,11 +1,11 @@
 /**
  * DynamicDescription
  *
- * DynamicDescription 1.0
+ * DynamicDescription 1.0.1
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0
+ * @version     1.0.1
  * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample  
@@ -19,7 +19,7 @@
  *              meta description, but could be used anywhere where a
  *              simple description is needed. Can be used multiple times
  *              on a single page.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: James Ehly
  * Author URI: http://www.devtrench.com/
  *             http://www.ehlydesign.com/
@@ -127,8 +127,8 @@ if (!function_exists(getDynaDescription)) {
     $text = str_replace("\n",' ',$text);
     $text = str_replace("\r",' ',$text);
     /* remove entity chars */
-    //$text = preg_replace('~&.+;~U',' ',$text);
-    $text = html_entity_decode($text,ENT_HTML5,'UTF-8');	
+    $text = html_entity_decode($text,ENT_QUOTES|ENT_HTML5,'UTF-8');
+	$text = str_replace(array('"',"'"),'',$text);	
     /* remove special MODx tags - chunks, snippets, etc.
      * If we don't do this they'll end up expanded in the description.
      */
