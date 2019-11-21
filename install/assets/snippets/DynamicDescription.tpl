@@ -141,7 +141,7 @@ if (!function_exists(getDynaDescription)) {
       array_push($words, '...');
       $text = implode(' ', $words);
     }
-    return trim(stripslashes($text));
+    return trim(stripslashes(htmlentities($text)));
   }
 }
 if (!empty($descriptionTV)) {
