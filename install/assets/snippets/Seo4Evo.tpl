@@ -15,7 +15,7 @@
  * @documentation Documentation: http://www.tattoocms.it/extras/packages/seo4evo.html
  * @documentation Github Repository: https://github.com/Nicola1971/Seo4Evo
  * @reportissues Report Issues: https://github.com/Nicola1971/Seo4Evo/issues 
- * @lastupdate  17-01-2018
+ * @lastupdate  24-01-2023
  */
 
 /**
