@@ -2,11 +2,11 @@
 /**
  * Seo4Evo
  *
- * Seo4Evo 1.0.1 - Manage and return Meta Tags using Evolution Tvs
+ * Seo4Evo 1.0.2 - Manage and return Meta Tags using Evolution Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.1
+ * @version     1.0.2
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @author      Contributor: risingisland https://github.com/risingisland
  * @author      Contributor: Serg28 https://github.com/Serg28
@@ -21,7 +21,7 @@
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
-| Snippet Version:  1.0.1
+| Snippet Version:  1.0.2
 |
 | Description:
 | Manage and return Meta Tags using modx Tvs from Seo4Evo Package
@@ -128,7 +128,7 @@ $MetaRobots = "	<meta name=\"robots\" content=\"[*RobotsIndex*], [*RobotsFollow*
 $MetaCopyright = "	<meta name=\"copyright\" content=\"[(site_name)]\">\n";
 
 // *** Last Modified ***//
-$editedon = date(r,$modx->documentObject['editedon']);
+$editedon = date('r',$modx->documentObject['editedon']);
 $MetaEditedOn = "	<meta http-equiv=\"last-modified\" content=\"".$editedon."\">\n";
 
 // ** FACEBOOK OPEN GRAPH PROTOCOL **//

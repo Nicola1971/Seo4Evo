@@ -1,11 +1,11 @@
 /**
  * DynamicDescription
  *
- * DynamicDescription 1.0.1
+ * DynamicDescription 1.0.2
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.1
+ * @version     1.0.2
  * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample  
@@ -19,7 +19,7 @@
  *              meta description, but could be used anywhere where a
  *              simple description is needed. Can be used multiple times
  *              on a single page.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: James Ehly
  * Author URI: http://www.devtrench.com/
  *             http://www.ehlydesign.com/
