@@ -118,7 +118,7 @@ $descriptionTV = $descriptionTvArray[$descriptionTV];
  * Function: getDynaDescription()
  * Returns:  A string of text ready to be placed in a meta description tag
  */
-if (!function_exists(getDynaDescription)) {
+if (!function_exists('getDynaDescription')) {
   function getDynaDescription($text='',$excerpt_length=25)
   {
     global $modx;
