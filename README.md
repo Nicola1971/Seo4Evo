@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo v1.0.2
+### Seo4Evo v1.0.4
 
 Collection of SEO Tools for Evolution CMS from various authors with a dedicated ManagerManager Tab
 
@@ -35,6 +35,18 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
  
 #Updates
+## 1.0.4 
+* Metakeywords are now disabled by default (deprecated tag)
+* Changed separator in title tag (replaced "|" with "-")
+* Removed GooglePlus Social (deprecated)![image](https://github.com/user-attachments/assets/18d271ac-2aed-4860-be45-ab27c1b3407c)
+
+
+## 1.0.3 
+* various fixes
+
+## 1.0.2 
+* 1.0.2 fix dynamic description snippet
+
 ## 1.0.1 
 * Dropped RC :smile: **4 years of release candidate are enough**. Previous version will be considered <=1.0
 * GeoLocation, DublinCore, Favicons, HeaderExtra by  [risingisland](https://github.com/risingisland)
