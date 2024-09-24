@@ -2,11 +2,11 @@
 /**
  * Seo4Evo
  *
- * Seo4Evo 1.0.2 - Manage and return Meta Tags using Evolution Tvs
+ * Seo4Evo 1.0.4 - Manage and return Meta Tags using Evolution Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.2
+ * @version     1.0.4
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @author      Contributor: risingisland https://github.com/risingisland
  * @author      Contributor: Serg28 https://github.com/Serg28
@@ -15,20 +15,20 @@
  * @documentation Documentation: http://www.tattoocms.it/extras/packages/seo4evo.html
  * @documentation Github Repository: https://github.com/Nicola1971/Seo4Evo
  * @reportissues Report Issues: https://github.com/Nicola1971/Seo4Evo/issues 
- * @lastupdate  24-01-2023
+ * @lastupdate  19-09-2024
  */
 
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
-| Snippet Version:  1.0.2
+| Snippet Version:  1.0.4
 |
 | Description:
-| Manage and return Meta Tags using modx Tvs from Seo4Evo Package
+| Manage and return Meta Tags using Evolution Tvs from Seo4Evo Package
 |
 | Basic Snippet Parameters:
 |
-| Keywords - disable/enable MetaKeywords metatags (default 1 = enabled) - Example: &Keywords=`0`
+| Keywords - disable/enable MetaKeywords metatags (default 0 = disabled) - Example: &Keywords=`0`
 | KeywordsTv - custom keywords tv - Example: &KeywordsTv=`documentTags`
 | MetaDescriptionTv -  custom description tv - Example: &MetaDescriptionTv=`introtext`
 | all_page_keywords - chunk or comma separated list of Keywords displayed on all pages - Example: &all_page_keywords=`modx, snippets, plugins`
@@ -42,10 +42,6 @@
 | OGtype - default: website - Example &OGtype=`article`
 | OGimageTv - default: thumbnail - Example: &OGimageTv=`my-thumbnail`
 |
-| ******* GooglePlus  Parameters: ******
-| GooglePlus - enable G+ metatags  - Example: &GooglePlus=`1`
-| linkPub your google publisher page  - Example: &linkPub=`https://plus.google.com/123456789123456789`
-|
 | Usage:
 |  Insert [[Seo4Evo]] anywhere in the head section of your template.
 |
@@ -55,15 +51,13 @@
 |  With Facebook Open Graph metatags
 | [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article`]]
 |
-| With Facebook Open Graph e Google plus metatags
-| [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789`]]
 |
-| With Facebook Open Graph, Google plus metatags, GeoLocation, DublinCore, Favicons
-| [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789` &GeoLocation=`1` &Country=`IT-RM` &City=`Rome` &LatLon=`41.859061, 12.540894` &DublinCore=`1` &dcLang=`en` &Favicons=`1` &iconDir=`/`]]
+| With Facebook Open Graph, GeoLocation, DublinCore, Favicons
+| [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GeoLocation=`1` &Country=`IT-RM` &City=`Rome` &LatLon=`41.859061, 12.540894` &DublinCore=`1` &dcLang=`en` &Favicons=`1` &iconDir=`/`]]
 | ---------------------------------------------------------------------------
 
 */
-$Keywords = isset($Keywords) ? $Keywords : '1';
+$Keywords = isset($Keywords) ? $Keywords : '0';
 $KeywordsTv = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
 $MetaDescriptionTv = isset($MetaDescriptionTv) ? $MetaDescriptionTv : 'MetaDescription';
 $MetaKeywords ="";
@@ -89,10 +83,10 @@ $CTitle = $modx->getTemplateVarOutput('CustomTitle',$id);
 $Custom = $CTitle['CustomTitle'];
 
 if(!$Custom == ""){
-$MetaTitle = "	<title>".$preTitle.$Custom.$postTitle." | [(site_name)]</title>\n";
+$MetaTitle = "	<title>".$preTitle.$Custom.$postTitle."</title>\n";
 $SocialTitle = $preTitle.$Custom.$postTitle;
 } else {
-      $MetaTitle = "	<title>".$preTitle.$pagetitle.$postTitle." | [(site_name)]</title>\n";
+      $MetaTitle = "	<title>".$preTitle.$pagetitle.$postTitle."</title>\n";
       $SocialTitle = $preTitle.$pagetitle.$postTitle;
    }
 
@@ -147,17 +141,6 @@ $MetaPropertyDescription = "	<meta property=\"og:description\" content=\"".$desc
 $MetaPropertyUrl = "	<meta property=\"og:url\" content=\"".$url."\">\n";
 $MetaPropertyImage = "	<meta property=\"og:image\" content=\"[(site_url)][*$imageUrl*]\">\n";
 $MetaPropertyFbApp = "	<meta property=\"fb:app_id\" content=\"".$OGfbappId."\">\n\n";
-
-//*** Google Plus ***//
-$GoogleDesc = "	<!-- Google Publisher. Profile url example: https://plus.google.com/1130658794498306186 
-	=================================================== -->\n";
-$linkPub = isset($linkPub) ? $linkPub : '';
-$LinkPublisher = "	<link rel=\"publisher\" href=\"".$linkPub."\">\n\n";
-$GAuthor = $modx->getTemplateVarOutput('GoogleAuthor',$id);
-$GoogleAthorship = $GAuthor['GoogleAuthor'];
-if(!$GoogleAthorship == ""){
-$LinkAuthor = "	<link rel=\"author\" href=\"".$GoogleAthorship."\">\n\n";
-}
 
 //*** Canonical ***//
 // Custom CanonicalUrl tv
@@ -236,7 +219,7 @@ if ($HeaderExtras >= 1) {
     $output .= $HeaderExtra;
 }
 $output .= $MetaTitle.$MetaDesc;
-//return Keyword metatags if Keywords=1 (default 1)
+//return Keyword metatags if Keywords=1 (default 0)
 if ($Keywords >= 1) {
     $output .= $MetaKeywords;
 }
@@ -244,10 +227,6 @@ $output .= $MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
 //return OpenGraph metatags if OpenGraph=1
 if ($OpenGraph >= 1) {
     $output .= $FbDesc.$MetaProperty.$MetaPropertyType.$MetaPropertyTitle.$MetaPropertyDescription.$MetaPropertyUrl.$MetaPropertyImage.$MetaPropertyFbApp;
-}
-//return Google plus metatags if GooglePlus=1
-if ($GooglePlus >= 1) {
-    $output .= $GoogleDesc.$LinkAuthor.$LinkPublisher;
 }
 //return GeoLocation if GeoLocation=1
 if ($GeoLocation >= 1) {
