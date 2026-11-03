@@ -1,11 +1,11 @@
 /**
  * DynamicDescription
  *
- * DynamicDescription 1.0.3
+ * DynamicDescription 1.0.4
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.3
+ * @version     1.0.4
  * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample  
@@ -19,7 +19,7 @@
  *              meta description, but could be used anywhere where a
  *              simple description is needed. Can be used multiple times
  *              on a single page.
- * Version: 1.0.3 (PHP 8.x compatibility)
+ * Version: 1.0.4 (PHP 8.x compatibility, &escape parameter)
  * Author: James Ehly
  * Author URI: http://www.devtrench.com/
  *             http://www.ehlydesign.com/
@@ -79,6 +79,11 @@
  * empty then it will default to the content of that document. This also
  * changes the maxWordCount to 30.
  *
+ * <meta name="description" content="[[DynamicDescription? &descriptionTV=`MetaDescription` &escape=`1`]]">
+ *
+ * The above example returns text that is safe inside an HTML attribute
+ * (see &escape below). Seo4Evo calls the snippet this way.
+ *
  */
 
 /* Parameters */
@@ -118,6 +123,20 @@ if ($descriptionTvName !== '') {
   }
 }
 
+/**
+ * &escape
+ * 0 | 1 (0)
+ * 0 = original behaviour (quotes and apostrophes are removed, output not escaped).
+ * 1 = output safe for an HTML attribute: apostrophes and quotes are kept and
+ *     & < > " ' are converted with htmlspecialchars (accented letters are left as they are).
+ *     The TV value is escaped too, without double-encoding existing entities.
+ *     MODX tags in the TV value are kept (e.g. [(site_name)]); in the text taken from
+ *     the content, decoded [ ] { } ` are encoded so they can't become MODX tags.
+ */
+$escape = !empty($escape) && $escape !== '0' && $escape !== 'false';
+$charset = (string)($modx->config['modx_charset'] ?? 'UTF-8');
+if ($charset === '') $charset = 'UTF-8';
+
 
 /* Snippet Code */
 
@@ -153,14 +172,47 @@ if (!function_exists('getDynaDescription')) {
     return trim(stripslashes($text));
   }
 }
+/**
+ * Function: getDynaDescriptionEscaped() - used with &escape=`1`
+ * Returns:  A string of text escaped for an HTML attribute
+ */
+if (!function_exists('getDynaDescriptionEscaped')) {
+  function getDynaDescriptionEscaped($text='',$excerpt_length=25,$charset='UTF-8')
+  {
+    global $modx;
+    $text = (string)$text;
+    $excerpt_length = max(1, (int)$excerpt_length);
+    $text = str_replace(array("\r","\n"),' ',$text);
+    /* keep a space between block elements, so "</p><p>" doesn't join two words */
+    $text = preg_replace('~<(br|hr|/p|/div|/li|/h[1-6]|/td|/th|/tr|/blockquote)\b[^>]*>~i', '$0 ', $text);
+    /* remove HTML and MODX tags BEFORE decoding entities:
+     * an escaped "&lt;20%&gt;" in the content is text, not a tag */
+    $text = $modx->stripTags($text);
+    $text = html_entity_decode($text,ENT_QUOTES|ENT_HTML5,$charset);
+    /* remove empty spaces */
+    $collapsed = preg_replace('/\s+/u', ' ', $text);
+    $text = ($collapsed !== null) ? $collapsed : preg_replace('/\s+/', ' ', $text);
+    $text = trim((string)$text);
+    $words = preg_split ("/\s+/", $text,$excerpt_length+1);
+    if (count($words) > $excerpt_length) {
+      array_pop($words);
+      array_push($words, '...');
+      $text = implode(' ', $words);
+    }
+    $text = htmlspecialchars($text, ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML401, $charset);
+    /* decoded brackets must not become MODX tags when the parser processes the output */
+    return str_replace(array('[',']','{','}','`'), array('&#91;','&#93;','&#123;','&#125;','&#96;'), $text);
+  }
+}
 if (!empty($descriptionTV)) {
   // if the $descriptionTV is not empty then we just print it with
   // no extra processing, it's up to you to manage your description
-  echo $descriptionTV;
+  // (with &escape=`1` it is only made safe for an HTML attribute)
+  echo $escape ? htmlspecialchars($descriptionTV, ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML401, $charset, false) : $descriptionTV;
 } else {
   // for everyone else that is lazy, just grab it from the content, yeah!
   $doc = $modx->getDocument($id,'content');
   $content = is_array($doc) ? (string)($doc['content'] ?? '') : '';
-  echo getDynaDescription($content,$maxWordCount);
+  echo $escape ? getDynaDescriptionEscaped($content,$maxWordCount,$charset) : getDynaDescription($content,$maxWordCount);
 }
 ?>
