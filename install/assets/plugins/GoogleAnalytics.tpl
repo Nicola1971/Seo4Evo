@@ -2,197 +2,156 @@
 /**
  * GoogleAnalytics
  *
- * Adds your Google Analytics to every page in your site
+ * Adds Google Analytics 4 (gtag.js) to every page in your site
  *
  * @author     Mark Kaplan
  * @category   plugin
- * @version    2.0.1 PL
+ * @version    3.0 PL
  * @license	 http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal    @events OnWebPagePrerender
  * @internal    @disabled 1
  * @internal    @installset base
  * @internal    @modx_category Seo4Evo
- * @internal    @properties  &account=Account;string;UA-000000-0 &testMode=Test Mode;list;true,false;false &trackingNameTV=Alt tracking URL TV name;string; &trackingNamePH=Alt tracking URL placeholder name;string;&extraJs=Chunk containing extra JS;string; &codetype=Analytics code;list;UniversalAnalytics,GoogleAnalytics;UniversalAnalytics &codePosition=Place the analitycs code before closing tag;list;head,body;body
+ * @internal    @properties  &account=Measurement ID (G-XXXXXXXXXX);string;G-XXXXXXXXXX &testMode=Test Mode;list;true,false;false &consentMode=Consent Mode v2 default;list;none,denied;none &trackingNameTV=Alt page path TV name;string; &trackingNamePH=Alt page path placeholder name;string; &extraJs=Chunk containing extra JS;string; &codePosition=Place the analytics code before closing tag;list;head,body;head
  */
 
-//<?
-/**
- * GoogleAnalytics
- *
- * Adds your Google Analytics to every page in your site
- *
- * @author     Mark Kaplan
- * @category   plugin
- * @version    2.0 PL
- * @license	 http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
- * @internal    @events OnWebPagePrerender
- * @internal    @disabled 1
- * @internal    @installset base
- * @internal    @modx_category Seo4Evo
- * @internal    @properties  &account=Account;string;UA-000000-0 &testMode=Test Mode;list;true,false;false &trackingNameTV=Alt tracking URL TV name;string; &trackingNamePH=Alt tracking URL placeholder name;string;&extraJs=Chunk containing extra JS;string; &codetype=Analytics code;list;UniversalAnalytics,GoogleAnalytics;UniversalAnalytics &codePosition=Place the analitycs code before closing tag;list;head,body;body
- */
+/*
+GoogleAnalytics 3.0 - Google Analytics 4
+By Mark Kaplan
+Updated by Nicola Lambathakis, Nick Crossland, David Hyland, Ryan Thrash
 
+CHANGELOG
 
-// By Mark Kaplan
-// Updated by Nicola Lambathakis, Nick Crossland, David Hyland, Ryan Thrash
+3.0   - Google Analytics 4 (gtag.js). Universal Analytics and ga.js are no longer processed by Google
+        (since July 2023): a UA-xxxx account is ignored and a warning comment is added to the page source.
+      - New parameter consentMode (Consent Mode v2): "denied" sets all consent types to denied
+        before the config call; your cookie banner must then call gtag('consent','update',{...}).
+      - Alternative tracking name (TV or placeholder) is sent as page_location.
+      - Default position: before </head> (as recommended by Google).
+      - PHP 8.x compatible. The "codetype" parameter of 2.x is no longer used and can be removed.
+2.0.2 - PHP 8.x compatibility
+2.0   - New Code position parameter
+1.9   - New Option to change code type (UniversalAnalytics/GoogleAnalytics)
+1.8   - New Google Universal Analitycs code
+1.6   - Respect the site config "Enable stats tracking" setting
+1.5   - Added "extraJs" parameter
+1.4   - Alternative tracking name (TV or placeholder)
+1.2   - Added InManager check and test mode parameter
 
-
-/* CHANGELOG
-
-2.0 - New Code position parameter
-
-1.9 - New Option to change code type (UniversalAnalytics/GoogleAnalytics)
-
-1.8 - New Google Universal Analitycs code
-
-1.7 - 5 Jan 2011 - fix bug with trackingNameTV (http://modxcms.com/forums/index.php/topic,52422.msg335386.html#msg335386)
-
-1.6 - 25 June 2010 - respect the site config "Enable stats tracking" setting **IF YOU UPGRADE AND FIND THE PLUGIN IS NOT WORKING - CHECK THIS SETTING, AS IT MAY NOT BE ENABLED ON YOUR SITE**
-
-1.5 - 9 June 2010 - updated to use only the latest Async tracking code, plus various cleanups. Added "extraJs" parameter. Add documentation. Fixed check to surpress output in logged in manager (which was broken)
-
-1.4 - 12-Mar-08 - added option to provide an alternative tracking name (by template variable or placeholder value). Made configuration interface slightly friendlier
-
-1.3 - 14-Dec-07 - added option of new or legacy analytics code
-
-1.2 - 1-Aug-06 - Added InManager check and test mode parameter
-
-1.1 - 30-Jun-06 - Updated to work with current Google docs
-
-*/
-
-
-/* INSTALL
-
-1. Create a new plugin, and paste the contents of this file into the Plugin Code area. Set the plugin name to "Google Analytics" and description to "<strong>1.7</strong>  Adds Google Analytics code to every page in your site"
-
-2. Copy this line into the Plugin Configuration of the Configuration tab:
-
-&account=Account;string;UA-000000-0 &testMode=Test Mode;list;true,false;false &trackingNameTV=Alt tracking URL TV name;string; &trackingNamePH=Alt tracking URL placeholder name;string;&extraJs=Chunk containing extra JS;string; &codetype=Analytics code;list;UniversalAnalytics,GoogleAnalytics;UniversalAnalytics &codePosition=Place the analitycs code before closing tag;list;head,body;body
-
-3. Enter your Google Account details on the configuration tab
-
-4. Check the OnWebPagePrerender box on the System Events tab
-
-5. Press Save
-
-6. Ensure "Stats Tracking" is enabled in the Site Configuration menu (Tools -> Configuration -> [ Site ] tab )  ** IMPORTANT IF UPGRADING - THIS SETTING WAS NOT RESPECTED BEFORE **
-
-*/
-
-/* USAGE
-
-Once installed, you don't need to do anything else - all HTML pages which have the "Enable Stats Tracking" box ticked in Manager will automatically have the code inserted.
+UPGRADE FROM 2.x
+Keep the existing plugin and replace the code. In the Configuration tab, replace the UA-… value
+of "account" with your GA4 Measurement ID (G-…). You can paste the new properties line from the
+docblock above to get the new labels and the consentMode option.
 
 PARAMETERS (set in configuration tab)
 
-account = Google Analytics tracking code, which looks like UA-000000-0
-testMode = boolean - if true, do not send tracking data to Google. Code is outputted as comments, useful for debugging
-trackingNameTV = see ALTERNATIVE TRACKING NAMES
-trackingNamePH = see ALTERNATIVE TRACKING NAMES
-extraJs = name of a chunk containing extra JS, which is inserted into the Google tracking code before the page view is recorded, if you wish to take advantage of GA's custom tracking features
-codetype=Analytics js code type: new Universal Analytics or old GoogleAnalytics code
-codePosition = choose js position : before closing head tag or before closing body tag (suggested)
+account        = GA4 Measurement ID, like G-ABC123DEF4 (Admin > Data streams > Web)
+testMode       = true: the code is output as an HTML comment, nothing is sent to Google
+consentMode    = none: no consent default is set (use it if your consent tool already does it)
+                 denied: analytics_storage, ad_storage, ad_user_data, ad_personalization = denied
+                 until your cookie banner updates the consent
+trackingNameTV = name of a TV with an alternative page path or URL for this page
+trackingNamePH = name of a placeholder with an alternative page path or URL (overrides the TV)
+extraJs        = name of a chunk with extra JS, inserted after gtag() is defined and before the config call
+                 (e.g. gtag('set', 'user_properties', {...});)
+codePosition   = head (default, recommended) or body
 
-ALTERNATIVE TRACKING NAMES
-By default, Google will track the pages based on their [friendly] URL. Sometimes you may want to tell Analytics to report alternative tracking names.
-For example to define stages of a goals, but where the URL may not change - e.g. submitting an eForm
-The value for the URL that will be tracked can be set either by supplying a Template Variable name - this can then be entered on any page via the Manager
-Alternatively the name of a placeholder can be supplied, which can be set by other plugins or snippets. A placeholder value will override a template value.
-
+NOTES
+- The plugin respects the site setting "Track visitors" (track_visitors) and the "Track" box of each
+  document (donthit). Logged-in manager users get the code as an HTML comment.
+- Only text/html documents in the front end are tracked.
 */
 
 // Is stats tracking turned on in the Site Config?
 if ($modx->getConfig('track_visitors') != 1) {
 	return;
 }
+if ($modx->Event->name !== 'OnWebPagePrerender') {
+	return;
+}
 
+// Only track HTML documents, in the front end, which have the "Track" box checked in the Manager
+if (!$modx->isFrontEnd()
+	|| !empty($modx->documentObject['donthit'])
+	|| ($modx->documentObject['contentType'] ?? 'text/html') !== 'text/html') {
+	return;
+}
 
 // Parameters
-$account = isset($account) && $account != 'UA-000000-0' ? $account : ''; // Ignore default value
-$testMode = isset($testMode) && ($testMode == 'true') ? true: false;
-$extraJs = isset($extraJs) ? $modx->evalSnippets($modx->mergePlaceholderContent($modx->getChunk($extraJs))) : '';
-$codetype = isset($codetype)? $codetype: 'UniversalAnalytics';
-$codePosition = isset($codePosition)? $codePosition: 'body';
+$account      = trim((string)($account ?? ''));
+$testMode     = (($testMode ?? 'false') === 'true');
+$consentMode  = (($consentMode ?? 'none') === 'denied') ? 'denied' : 'none';
+$codePosition = (($codePosition ?? 'head') === 'body') ? 'body' : 'head';
 
-// Tracking name - is it from a placeholder or a template variable?
-$trackingName_value = '';
-if (isset($trackingNameTV)) {
-		$trackingNameTv_array = !empty($trackingNameTV)?$modx->getTemplateVarOutput($trackingNameTV):array();
-		$trackingName_value = (isset($trackingNameTv_array[$trackingNameTV]) && !empty($trackingNameTv_array[$trackingNameTV]))?$trackingNameTv_array[$trackingNameTV]:$trackingName_value;
+if ($account === '' || strtoupper($account) === 'G-XXXXXXXXXX' || strtoupper($account) === 'UA-000000-0') {
+	return; // not configured yet
 }
 
-// If a placeholder name is defined, and the placeholder has a value, use that instead
-if (isset($trackingNamePH) && !empty($trackingNamePH)) {
-	$v = $modx->getPlaceholder($trackingNamePH) ;
-	$trackingName_value = !empty($v) ? $v : $trackingName_value;
-}
-
-
-// make sure an account number has been supplied
-if(!empty($account)){
-
-	// Enclose value in quotes and a comma
-	$trackingName_value = (!empty($trackingName_value)) ? ', "'.addslashes($trackingName_value).'"' : '';
-		if ($codetype == "GoogleAnalytics") {
-	$script = "
-
-	<script type=\"text/javascript\">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', '$account']);
-	  $extraJs
-	  _gaq.push(['_trackPageview' $trackingName_value]);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>";
-	$insert_before = ''.$codePosition.'';
-		}
-        else {
-    	$script = "
-
-
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create','$account','auto');
-  ga('send','pageview');
-
-</script>";
-	$insert_before = ''.$codePosition.'';
-        }
-
-
+if (!preg_match('/^G-[A-Z0-9]+$/i', $account)) {
+	if (stripos($account, 'UA-') === 0) {
+		$script = '<!-- GoogleAnalytics: "' . htmlspecialchars($account, ENT_QUOTES) . '" is a Universal Analytics ID. Google stopped processing UA data in July 2023: set a GA4 Measurement ID (G-...) in the plugin configuration. -->';
+	} else {
+		$script = '<!-- GoogleAnalytics: invalid Measurement ID "' . htmlspecialchars($account, ENT_QUOTES) . '" (expected G-...). -->';
+	}
 } else {
-  $script = '<!-- Google Analytics account not supplied -->';
+	$account = strtoupper($account);
+
+	// Alternative page path: placeholder overrides TV
+	$trackingName = '';
+	if (!empty($trackingNameTV)) {
+		$tv = $modx->getTemplateVarOutput($trackingNameTV);
+		if (is_array($tv) && !empty($tv[$trackingNameTV])) {
+			$trackingName = (string)$tv[$trackingNameTV];
+		}
+	}
+	if (!empty($trackingNamePH)) {
+		$ph = $modx->getPlaceholder($trackingNamePH);
+		if (!empty($ph)) {
+			$trackingName = (string)$ph;
+		}
+	}
+
+	// Extra JS from chunk
+	$extra = '';
+	if (!empty($extraJs)) {
+		$chunk = $modx->getChunk($extraJs);
+		if (is_string($chunk) && $chunk !== '') {
+			$extra = $modx->evalSnippets($modx->mergePlaceholderContent($chunk));
+		}
+	}
+
+	$jsonFlags = JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+	$lines = array();
+	$lines[] = '<!-- Google tag (gtag.js) -->';
+	$lines[] = '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $account . '"></script>';
+	$lines[] = '<script>';
+	$lines[] = '  window.dataLayer = window.dataLayer || [];';
+	$lines[] = '  function gtag(){dataLayer.push(arguments);}';
+	if ($consentMode === 'denied') {
+		$lines[] = "  gtag('consent', 'default', {'ad_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied', 'analytics_storage': 'denied', 'wait_for_update': 500});";
+	}
+	$lines[] = "  gtag('js', new Date());";
+	if ($extra !== '') {
+		$lines[] = $extra;
+	}
+	if ($trackingName !== '') {
+		$lines[] = "  gtag('config', " . json_encode($account, $jsonFlags) . ", {'page_location': new URL(" . json_encode($trackingName, $jsonFlags) . ", window.location.origin).href});";
+	} else {
+		$lines[] = "  gtag('config', " . json_encode($account, $jsonFlags) . ");";
+	}
+	$lines[] = '</script>';
+	$script = implode("\n", $lines);
+
+	if ($testMode) {
+		$script = "<!-- Google Analytics plugin is in test mode - output would be:\n" . str_replace('--', '- -', $script) . "\n-->";
+	} elseif (isset($_SESSION['mgrValidated'])) {
+		$script = "<!-- Logged in to Manager - Google Analytics plugin output suppressed, but would be:\n" . str_replace('--', '- -', $script) . "\n-->";
+	}
 }
 
-
-switch ($modx->Event->name) {
-
-	case "OnWebPagePrerender":
-
-		if ($testMode) {
-			$script = '<!-- Google Analytics plugin is in test mode - output would be: '. $script . ' -->';
-		} else if (isset($_SESSION['mgrValidated'])) {
-			$script = '<!-- Logged in to Manager - Google Analytics plugin output surpressed, but would be: '. $script . ' -->';
-		}
-
-		// Only track HTML documents, in the front end, which have the "Track" box checked in the Manager
-		$googleize = ($modx->isFrontEnd() && $modx->documentObject['donthit']==0 && $modx->documentObject['contentType']=='text/html');
-
-		if ($googleize) {
-			$modx->documentOutput = preg_replace("/(<\/$insert_before>)/i", $script."\n\\1", $modx->documentOutput);
-		}
-
-		break;
-
+// Insert before the last </head> or </body> (no regex: the script may contain $ or \)
+$output = (string)$modx->documentOutput;
+$pos = strripos($output, '</' . $codePosition . '>');
+if ($pos !== false) {
+	$modx->documentOutput = substr_replace($output, $script . "\n", $pos, 0);
 }
