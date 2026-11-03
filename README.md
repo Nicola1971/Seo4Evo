@@ -25,7 +25,7 @@ http://modx.com/extras/package/sitemap
 http://modx.com/extras/package/dynamicdescription
 
 ## Plugins:
-### GoogleAnalytics plugin 2.0 
+### GoogleAnalytics plugin 3.0 
 https://github.com/Nicola1971/GoogleAnalytics-Plugin
 
 ### Virtual Alias
