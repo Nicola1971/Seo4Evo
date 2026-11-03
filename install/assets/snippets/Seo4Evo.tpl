@@ -125,7 +125,8 @@ $dyndesc = $modx->runSnippet(
         array(
             "descriptionTV" => $MetaDescriptionTv,
             "id" => $id,
-            "maxWordCount" => "25"
+            "maxWordCount" => "25",
+            "escape" => "1"
         )
 );
 
