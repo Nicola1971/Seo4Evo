@@ -2,11 +2,11 @@
 /**
  * Seo4Evo
  *
- * Seo4Evo 1.0.4 - Manage and return Meta Tags using Evolution Tvs
+ * Seo4Evo 1.0.5 - Manage and return Meta Tags using Evolution Tvs
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.4
+ * @version     1.0.5
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
  * @author      Contributor: risingisland https://github.com/risingisland
  * @author      Contributor: Serg28 https://github.com/Serg28
@@ -15,13 +15,13 @@
  * @documentation Documentation: http://www.tattoocms.it/extras/packages/seo4evo.html
  * @documentation Github Repository: https://github.com/Nicola1971/Seo4Evo
  * @reportissues Report Issues: https://github.com/Nicola1971/Seo4Evo/issues 
- * @lastupdate  19-09-2024
+ * @lastupdate  03-11-2026
  */
 
 /**
 | --------------------------------------------------------------------------
 | Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
-| Snippet Version:  1.0.4
+| Snippet Version:  1.0.5
 |
 | Description:
 | Manage and return Meta Tags using Evolution Tvs from Seo4Evo Package
@@ -57,11 +57,28 @@
 | ---------------------------------------------------------------------------
 
 */
-$Keywords = isset($Keywords) ? $Keywords : '0';
-$KeywordsTv = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
-$MetaDescriptionTv = isset($MetaDescriptionTv) ? $MetaDescriptionTv : 'MetaDescription';
+// *** PARAMETERS (1.0.5: default per ogni parametro, compatibile PHP 8.x) ***//
+$Keywords          = (int)($Keywords ?? 0);
+$KeywordsTv        = (string)($KeywordsTv ?? '[*MetaKeywords*]');
+$MetaDescriptionTv = (string)($MetaDescriptionTv ?? 'MetaDescription');
+$all_page_keywords = (string)($all_page_keywords ?? '');
+$preTitle          = (string)($preTitle ?? '');
+$postTitle         = (string)($postTitle ?? '');
+$HeaderExtras      = (int)($HeaderExtras ?? 0);
+$OpenGraph         = (int)($OpenGraph ?? 0);
+$OGfbappId         = (string)($OGfbappId ?? '');
+$OGimageTv         = (string)($OGimageTv ?? 'thumbnail');
+$GeoLocation       = (int)($GeoLocation ?? 0);
+$Country           = (string)($Country ?? '');
+$City              = (string)($City ?? '');
+$LatLon            = (string)($LatLon ?? '');
+$DublinCore        = (int)($DublinCore ?? 0);
+$dcLang            = (string)($dcLang ?? '');
+$Favicons          = (int)($Favicons ?? 0);
+$iconDir           = (string)($iconDir ?? '');
+
 $MetaKeywords ="";
-$comma=(isset($all_page_keywords))?', ':'';
+$comma = ($all_page_keywords !== '') ? ', ' : '';
 
 // *** KEYWORDS ***//
 $MetaKeywords= "	<meta name=\"keywords\" content=\"{$all_page_keywords}{$comma}{$KeywordsTv}\">\n";
@@ -71,18 +88,16 @@ $MetaDesc = "";
 $MetaRobots = "";
 $MetaCopyright = "";
 
-$id = $modx -> documentObject['id'];
+$id = (int)($modx->documentObject['id'] ?? $modx->documentIdentifier);
 $url = $modx->makeUrl($id, '', '', 'full');
 
 // *** Meta Title ***//
-$preTitle = isset($preTitle) ? $preTitle : '';
-$postTitle = isset($postTitle) ? $postTitle : '';
-
-$pagetitle = $modx->documentObject['pagetitle'];
+$pagetitle = (string)($modx->documentObject['pagetitle'] ?? '');
+// getTemplateVarOutput() restituisce false se la TV non è assegnata al template
 $CTitle = $modx->getTemplateVarOutput('CustomTitle',$id);
-$Custom = $CTitle['CustomTitle'];
+$Custom = is_array($CTitle) ? (string)($CTitle['CustomTitle'] ?? '') : '';
 
-if(!$Custom == ""){
+if($Custom !== ""){
 $MetaTitle = "	<title>".$preTitle.$Custom.$postTitle."</title>\n";
 $SocialTitle = $preTitle.$Custom.$postTitle;
 } else {
@@ -109,7 +124,8 @@ $dyndesc = $modx->runSnippet(
         "DynamicDescription",
         array(
             "descriptionTV" => $MetaDescriptionTv,
-			"maxWordCount=" => "25"
+            "id" => $id,
+            "maxWordCount" => "25"
         )
 );
 
@@ -122,14 +138,13 @@ $MetaRobots = "	<meta name=\"robots\" content=\"[*RobotsIndex*], [*RobotsFollow*
 $MetaCopyright = "	<meta name=\"copyright\" content=\"[(site_name)]\">\n";
 
 // *** Last Modified ***//
-$editedon = date('r',$modx->documentObject['editedon']);
+$editedon = date('r', (int)($modx->documentObject['editedon'] ?? 0));
 $MetaEditedOn = "	<meta http-equiv=\"last-modified\" content=\"".$editedon."\">\n";
 
 // ** FACEBOOK OPEN GRAPH PROTOCOL **//
-$imageUrl = isset($OGimageTv) ? $OGimageTv : 'thumbnail';
-$type = isset($OGtype) ? $OGtype : 'website';
-$title = isset($OGtitle) ? $OGtitle : $preTitle.$Custom.$postTitle;
-$description = isset($OGdescription) ? $OGdescription : $dyndesc;
+$imageUrl = $OGimageTv;
+$type = isset($OGtype) ? (string)$OGtype : 'website';
+$description = isset($OGdescription) ? (string)$OGdescription : $dyndesc;
 
 
 $FbDesc = "	<!-- Facebook, more here http://ogp.me/ 
@@ -147,9 +162,9 @@ $MetaPropertyFbApp = "	<meta property=\"fb:app_id\" content=\"".$OGfbappId."\">\
 // with tv empty > link to siteurl for homepage and to full alias url for other pages.
 
 $CUrl = $modx->getTemplateVarOutput('CanonicalUrl',$id);
-$CanonicalUrl = $CUrl['CanonicalUrl'];
+$CanonicalUrl = is_array($CUrl) ? (string)($CUrl['CanonicalUrl'] ?? '') : '';
 
-if(!$CanonicalUrl == ""){
+if($CanonicalUrl !== ""){
 $Canonical = "	<link rel=\"canonical\" href=\"".$CanonicalUrl."\">\n\n";
 } else {
 	$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? "	<link rel=\"canonical\" href=\"[(site_url)]\" />" : "	<link rel=\"canonical\" href=\"[(site_url)][~[*id*]~]\">\n\n";
@@ -169,7 +184,7 @@ $DCmeta = "	<!-- Dublin Core Metadata Element Set
 	<link rel=\"schema.DC\" href=\"http://purl.org/DC/elements/1.0/\" />
 	<meta name=\"DC.Title\" content=\"".$SocialTitle."\" />
 	<meta name=\"DC.Creator\" content=\"[(site_name)]\" />
-	<meta name=\"DC.Type\" content=\"".$OGtype."\" />
+	<meta name=\"DC.Type\" content=\"".(isset($OGtype) ? (string)$OGtype : '')."\" />
 	<meta name=\"DC.Date\" content=\"".$editedon."\" />
 	<meta name=\"DC.Format\" content=\"text/html\" />
 	<meta name=\"DC.Language\" content=\"".$dcLang."\" />\n\n";
