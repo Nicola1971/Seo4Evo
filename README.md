@@ -1,6 +1,6 @@
 Seo4Evo
 =======
-### Seo4Evo v1.0.4
+### Seo4Evo v1.0.5
 
 Collection of SEO Tools for Evolution CMS from various authors with a dedicated ManagerManager Tab
 
@@ -35,6 +35,14 @@ http://www.stanback.net/code/modx/virtual-aliases.html
 
  
 #Updates
+
+## 1.0.5 
+* PHP8 compatibility
+* Various fixes to all snippets and plugins
+* Added escape parameter to DynamicDescription
+* GoogleAnalytics > GA4
+
+  
 ## 1.0.4 
 * Metakeywords are now disabled by default (deprecated tag)
 * Changed separator in title tag (replaced "|" with "-")
