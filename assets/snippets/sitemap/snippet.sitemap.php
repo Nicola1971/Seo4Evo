@@ -8,7 +8,7 @@ ini_set('memory_limit', '-1');
  * Outputs a machine readable site map for search engines and robots.
  *
  * @category snippet
- * @version 1.1 (2017-08-18)
+ * @version 1.2 (2026-11-03)
  * @license LGPL
  * @author Grzegorz Adamiak [grad], ncrossland, DivanDesign (http://www.DivanDesign.biz)
  * @internal @modx_category Navigation
@@ -36,6 +36,12 @@ Supports the following formats:
 
 
 Changelog:
+# 1.2 (2026-11-03) by Nicola Lambathakis
+* PHP 8.x compatibility: no warnings when a TV is not assigned to a document's template
+  or when a document is unpublished; functions declared once (snippet can run twice per request).
+* priority/changefreq fall back to the computed value when the TV is not assigned to the template
+  or is empty (avoids empty <priority></priority> and <changefreq></changefreq>).
+* lastmod uses publishedon when editedon is empty.
 # 1.0.11 (2012-10-01) by DivanDesign (http://www.DivanDesign.biz)
 + Document will be excluded from sitemap when changefreq parameter equals 'exclude'.
 * [(site_url)] (without alias) is using now for the start page ($modx->config['start_page']) document url.
@@ -83,11 +89,94 @@ TODO:
 --------------------------------------------------
 */
 
+/* Functions (declared once, before use) */
+if (!function_exists('seo4evoSitemapGetTV')) {
+    # gets (inherited) value of template variable
+    # returns null when the TV is not assigned to the document template (or the document is not reachable)
+    function seo4evoSitemapGetTV($modx, $docid, $doctv){
+        $output = null;
+        while ($pid = $modx->getDocument($docid, 'parent')){
+            $tv = $modx->getTemplateVar($doctv,'*',$docid);
+            if (!is_array($tv)) break; // TV not assigned to this template
+            $value = (string)($tv['value'] ?? '');
+            if (($value !== '' && substr($value,0,8) != '@INHERIT') || $value === ''){ // tv default value is overriden (including empty)
+                $output = $value;
+                break;
+            }else{ // there is no parent with default value overriden
+                $output = trim(substr($value,8));
+            }
+
+            // move up one document in document tree
+            $docid = $pid['parent'];
+        }
+
+        return $output;
+    }
+}
+
+if (!function_exists('seo4evoSitemapGetDocs')) {
+    # gets list of published documents with properties
+    function seo4evoSitemapGetDocs($modx, $startid, $priority, $changefreq, $excludeTV, $seeThruUnpub){
+        $fields = "id,editedon,template,published,searchable,pagetitle,type,isfolder,parent,publishedon,content LIKE '%<img%' as hasImage";
+        //If need to see through unpublished
+        if ($seeThruUnpub) $docs = $modx->getAllChildren($startid, 'menuindex', 'asc', $fields);
+        else               $docs = $modx->getActiveChildren($startid, 'menuindex', 'asc', $fields);
+        if (!is_array($docs)) return array();
+
+        $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($priority)));
+        $priority_exists = $modx->db->getRecordCount($rs) ? 1 : 0;
+        $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($changefreq)));
+        $changefreq_exists = $modx->db->getRecordCount($rs) ? 1 : 0;
+        $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($excludeTV)));
+        $excludeTV_exists  = $modx->db->getRecordCount($rs) ? 1 : 0;
+
+        // add sub-children to the list
+        foreach ($docs as $i => $doc){
+            $id = $doc['id'];
+            if(empty($doc['editedon'])) $doc['editedon'] = $docs[$i]['editedon'] = $doc['publishedon'] ?? 0;
+            if($id==$modx->config['site_start']) $docs[$i]['url'] = $modx->config['site_url'];
+            else                                 $docs[$i]['url'] = trim((string)$modx->makeUrl($id,'','','full'));
+
+            $date_diff = round(($_SERVER['REQUEST_TIME']-(int)$doc['editedon'])/86400);
+
+            $tvPriority = $priority_exists ? seo4evoSitemapGetTV($modx, $id, $priority) : null;
+            if($tvPriority !== null && $tvPriority !== '')   $docs[$i][$priority] = $tvPriority; // add priority property
+            elseif($id==$modx->config['site_start']) $docs[$i][$priority] = '1.0';
+            elseif($date_diff<7)                     $docs[$i][$priority] = '0.9';
+            elseif($date_diff<14)                    $docs[$i][$priority] = '0.8';
+            elseif($doc['parent']==0)                $docs[$i][$priority] = '0.6';
+            elseif($doc['isfolder'])                 $docs[$i][$priority] = '0.4';
+            elseif(1000<$date_diff) {
+                if(!empty($doc['hasImage']))         $docs[$i][$priority] = '0.4';
+                else                                 $docs[$i][$priority] = '0.3';
+            }
+            else                                     $docs[$i][$priority] = '0.5';
+
+            $tvChangefreq = $changefreq_exists ? seo4evoSitemapGetTV($modx, $id, $changefreq) : null;
+            if($tvChangefreq !== null && $tvChangefreq !== '') $docs[$i][$changefreq] = $tvChangefreq; // add changefreq property
+            elseif($id==$modx->config['site_start']) $docs[$i][$changefreq] = 'always';
+            elseif($doc['isfolder'])                 $docs[$i][$changefreq] = 'always';
+            elseif(365<$date_diff)                   $docs[$i][$changefreq] = 'never';
+            elseif(180<$date_diff)                   $docs[$i][$changefreq] = 'yearly';
+            elseif(60<$date_diff)                    $docs[$i][$changefreq] = 'monthly';
+            elseif(14<$date_diff)                    $docs[$i][$changefreq] = 'weekly';
+            elseif($date_diff)                       $docs[$i][$changefreq] = 'daily';
+            else                                     $docs[$i][$changefreq] = 'never';
+
+            if($excludeTV_exists) $docs[$i][$excludeTV] = seo4evoSitemapGetTV($modx, $id, $excludeTV); // add excludeTV property
+            else                  $docs[$i][$excludeTV] = false;
+
+            $docs = array_merge($docs, seo4evoSitemapGetDocs($modx, $id, $priority, $changefreq, $excludeTV, $seeThruUnpub));
+        }
+        return $docs;
+    }
+}
+
 /* Parameters */
 if(!isset($startid))          $startid = 0;
 if(!isset($priority))         $priority = 'sitemap_priority';
 if(!isset($changefreq))       $changefreq = 'sitemap_changefreq';
-if(!isset($excludeTemplates)) $excludeTemplates = array();
+if(!isset($excludeTemplates)) $excludeTemplates = '';
 if(!isset($excludeTV))        $excludeTV = 'sitemap_exclude';
 if(!isset($xsl))              $xsl = '';
 if(!isset($excludeWeblinks))  $excludeWeblinks = 1;
@@ -99,12 +188,13 @@ if (is_numeric($xsl)) $xsl = $modx->makeUrl($xsl);
 /* End parameters */
 
 # get list of documents
-$docs = getDocs($modx, $startid, $priority, $changefreq, $excludeTV, $seeThruUnpub);
+$docs = seo4evoSitemapGetDocs($modx, $startid, $priority, $changefreq, $excludeTV, $seeThruUnpub);
 
 
 # filter out documents by template or TV
 # ---------------------------------------------
 // get all templates
+$allTemplates = array();
 $select = $modx->db->select('id, templatename', '[+prefix+]site_templates');
 while ($query = $modx->db->getRow($select)){
     $allTemplates[$query['id']] = $query['templatename'];
@@ -115,7 +205,7 @@ $remainingTemplates = $allTemplates;
 // get templates to exclude, and remove them from the all templates list
 if (!empty ($excludeTemplates)){
     
-    $excludeTemplates = explode(',', $excludeTemplates);
+    $excludeTemplates = is_array($excludeTemplates) ? $excludeTemplates : explode(',', (string)$excludeTemplates);
     
     // Loop through each template we want to exclude
     foreach ($excludeTemplates as $template){
@@ -135,8 +225,8 @@ $_ = array();
 foreach ($docs as $doc){
     //by template, excludeTV, published, searchable
     if(!isset($remainingTemplates[$doc['template']])) continue;
-    if($doc[$excludeTV])                              continue;
-    if($doc[$changefreq]=='exclude')                  continue;
+    if(!empty($doc[$excludeTV]))                      continue;
+    if(($doc[$changefreq] ?? '')=='exclude')          continue;
     if(!$doc['published'])                            continue;
     if(!$doc['template'])                             continue;
     if(!$doc['searchable'])                           continue;
@@ -198,82 +288,3 @@ switch ($format){
 }
 
 return join("\n",$output);
-
-# functions
-# ---------------------------------------------
-
-# gets (inherited) value of templat e variable
-//TODO: wtf? In MODx 0.9.2.1 O_o Is this actually?
-function getTV($modx, $docid, $doctv){
-    while ($pid = $modx->getDocument($docid, 'parent')){
-        $tv = $modx->getTemplateVar($doctv,'*',$docid);
-        if (($tv['value'] && substr($tv['value'],0,8) != '@INHERIT') || !$tv['value']){ // tv default value is overriden (including empty)
-            $output = $tv['value'];
-            break;
-        }else{ // there is no parent with default value overriden 
-            $output = trim(substr($tv['value'],8));
-        }
-        
-        // move up one document in document tree
-        $docid = $pid['parent'];
-    }
-    
-    return $output;
-}
-
-# gets list of published documents with properties
-function getDocs($modx, $startid, $priority, $changefreq, $excludeTV, $seeThruUnpub){
-    $fields = "id,editedon,template,published,searchable,pagetitle,type,isfolder,parent,publishedon,content LIKE '%<img%' as hasImage";
-    //If need to see through unpublished
-    if ($seeThruUnpub) $docs = $modx->getAllChildren($startid, 'menuindex', 'asc', $fields);
-    else               $docs = $modx->getActiveChildren($startid, 'menuindex', 'asc', $fields);
-
-    $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($priority)));
-    $priority_exists = $modx->db->getRecordCount($rs) ? 1 : 0;
-    $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($changefreq)));
-    $changefreq_exists = $modx->db->getRecordCount($rs) ? 1 : 0;
-    $rs = $modx->db->select('name','[+prefix+]site_tmplvars',sprintf("name='%s'",$modx->db->escape($excludeTV)));
-    $excludeTV_exists  = $modx->db->getRecordCount($rs) ? 1 : 0;
-    
-    // add sub-children to the list
-    foreach ($docs as $i => $doc){
-        $id = $doc['id'];
-        if(!$doc['editedon']) $doc['editedon'] = $doc['publishedon'];
-        if($id==$modx->config['site_start']) $docs[$i]['url'] = $modx->config['site_url'];
-        else                                 $docs[$i]['url'] = trim($modx->makeUrl($id,'','','full'));
-        
-        $date_diff = round(($_SERVER['REQUEST_TIME']-(int)$doc['editedon'])/86400);
-        
-        if($priority_exists)                     $docs[$i][$priority] = getTV($modx, $id, $priority); // add priority property
-        elseif($id==$modx->config['site_start']) $docs[$i][$priority] = '1.0';
-        elseif($date_diff<7)                     $docs[$i][$priority] = '0.9';
-        elseif($date_diff<14)                    $docs[$i][$priority] = '0.8';
-        elseif($doc['parent']==0)                $docs[$i][$priority] = '0.6';
-        elseif($doc['isfolder'])                 $docs[$i][$priority] = '0.4';
-        elseif(1000<$date_diff) {
-            if($doc['hasImage'])                 $docs[$i][$priority] = '0.4';
-            else                                 $docs[$i][$priority] = '0.3';
-        }
-        else                                     $docs[$i][$priority] = '0.5';
-        
-        if($changefreq_exists)                   $docs[$i][$changefreq] = getTV($modx, $id, $changefreq); // add changefreq property
-        elseif($id==$modx->config['site_start']) $docs[$i][$changefreq] = 'always';
-        elseif($doc['isfolder'])                 $docs[$i][$changefreq] = 'always';
-        elseif(365<$date_diff)                   $docs[$i][$changefreq] = 'never';
-        elseif(180<$date_diff)                   $docs[$i][$changefreq] = 'yearly';
-        elseif(60<$date_diff)                    $docs[$i][$changefreq] = 'monthly';
-        elseif(14<$date_diff)                    $docs[$i][$changefreq] = 'weekly';
-        elseif($date_diff)                       $docs[$i][$changefreq] = 'daily';
-        else                                     $docs[$i][$changefreq] = 'never';
-        
-        if($excludeTV_exists) $docs[$i][$excludeTV] = getTV($modx, $id, $excludeTV); // add excludeTV property
-        else                  $docs[$i][$excludeTV] = false;
-        
-        //TODO: $modx->getAllChildren & $modx->getActiveChildren always return the array
-//         if ($modx->getAllChildren($id)){
-            $docs = array_merge($docs, getDocs($modx, $id, $priority, $changefreq, $excludeTV, $seeThruUnpub));
-//         }
-
-    }
-    return $docs;
-}
