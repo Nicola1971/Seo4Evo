@@ -1,11 +1,11 @@
 /**
  * DynamicDescription
  *
- * DynamicDescription 1.0.2
+ * DynamicDescription 1.0.3
  *
  * @category	snippet
  * @internal	@modx_category Seo4Evo
- * @version     1.0.2
+ * @version     1.0.3
  * @author      Author: James Ehly http://www.devtrench.com/
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample  
@@ -19,7 +19,7 @@
  *              meta description, but could be used anywhere where a
  *              simple description is needed. Can be used multiple times
  *              on a single page.
- * Version: 1.0.2
+ * Version: 1.0.3 (PHP 8.x compatibility)
  * Author: James Ehly
  * Author URI: http://www.devtrench.com/
  *             http://www.ehlydesign.com/
@@ -88,7 +88,7 @@
  * integer (25)
  * Sets the maximum word count of the description, default is 25 words
  */
-$maxWordCount = (!empty($maxWordCount) && is_numeric($maxWordCount)) ? $maxWordCount : 25;
+$maxWordCount = (isset($maxWordCount) && is_numeric($maxWordCount) && (int)$maxWordCount > 0) ? (int)$maxWordCount : 25;
 
 /**
  * &id
@@ -96,7 +96,7 @@ $maxWordCount = (!empty($maxWordCount) && is_numeric($maxWordCount)) ? $maxWordC
  * the id of the page you want a description for, defaults to the
  * current page.
  */
-$id = (is_numeric($id) && !empty($id)) ? $id : $modx->documentObject['id'];
+$id = (isset($id) && is_numeric($id) && (int)$id > 0) ? (int)$id : (int)($modx->documentObject['id'] ?? $modx->documentIdentifier);
 
 /**
  * &descriptionTV
@@ -108,8 +108,15 @@ $id = (is_numeric($id) && !empty($id)) ? $id : $modx->documentObject['id'];
  * empty then it will display the value of the TV and stop processing.
  * In other words, it will print it just as you typed it.
  */
-$descriptionTvArray = (!empty($descriptionTV)) ? $modx->getTemplateVarOutput($descriptionTV,$id) : '';
-$descriptionTV = $descriptionTvArray[$descriptionTV];
+$descriptionTvName = isset($descriptionTV) ? trim((string)$descriptionTV) : '';
+$descriptionTV = '';
+if ($descriptionTvName !== '') {
+  // getTemplateVarOutput() restituisce false se la TV non è assegnata al template
+  $descriptionTvArray = $modx->getTemplateVarOutput($descriptionTvName, $id);
+  if (is_array($descriptionTvArray) && isset($descriptionTvArray[$descriptionTvName])) {
+    $descriptionTV = (string)$descriptionTvArray[$descriptionTvName];
+  }
+}
 
 
 /* Snippet Code */
@@ -122,6 +129,8 @@ if (!function_exists('getDynaDescription')) {
   function getDynaDescription($text='',$excerpt_length=25)
   {
     global $modx;
+    $text = (string)$text;
+    $excerpt_length = max(1, (int)$excerpt_length);
     $text = str_replace(']]>', ']]&gt;', $text);
     /* remove line breaks */
     $text = str_replace("\n",' ',$text);
@@ -150,8 +159,8 @@ if (!empty($descriptionTV)) {
   echo $descriptionTV;
 } else {
   // for everyone else that is lazy, just grab it from the content, yeah!
-  $content = $modx->getDocument($id,'content');
-  $content = $content['content'];
+  $doc = $modx->getDocument($id,'content');
+  $content = is_array($doc) ? (string)($doc['content'] ?? '') : '';
   echo getDynaDescription($content,$maxWordCount);
 }
 ?>
